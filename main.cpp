@@ -360,6 +360,7 @@ int main()
             current= alphabetaPruning(current);
             if(checkRoadWin(current,1))
             {
+            	cerr<<"winning"<<endl;
                writeWeights(); 
             }
             printMove(current);

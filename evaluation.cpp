@@ -35,7 +35,9 @@ void writeWeights()
   myfile.open ("weights.txt");
   for(int i=0;i<weights.size();i++)
   { myfile <<weights[i] <<" ";
+   	cerr<<weights[i]<<" ";
    }
+   cerr<<weights.size()<<endl; 
   myfile.close();
 
 }
@@ -59,6 +61,7 @@ void initialWeights()
         cerr<<num<<endl; 
     }
     ifile.close();
+    cerr<<weights.size()<<endl;
 	/*weights.resize(10);
 	weights[0]=5; //in influence
 	weights[1]=5; //in influence
@@ -94,6 +97,7 @@ void train(state s, double trueVal)
 	weights[11]=weights[11]+learningR*(-2)*(trueVal-evaluation)*(facefeat21);  //-facefeat21
 	weights[12]=weights[12]+learningR*(-2)*(trueVal-evaluation)*(facefeat22);  //-facefeat22 
 	weights[13]=weights[13]+learningR*(-2)*(trueVal-evaluation)*(facefeat23);  //-facefeat23
+	cerr<<"ffeatures values"<<facefeat20<<" "<<facefeat21<<" "<<facefeat22<<endl;
 
 }
 
