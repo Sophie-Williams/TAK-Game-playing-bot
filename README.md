@@ -1,0 +1,1 @@
+This is a repository for the code of a bot for the popular game TAK.
