@@ -10,7 +10,7 @@ int ply=3;
 int boardSize=5; 
 bool ourCapRem =true;
 bool oppoCapRem=true;  
-int ourStonesRem=21; 
+int ourStonesRem=20; 
 int oppoStonesRem=21;
 int playerNum=1;
 double myremTime;

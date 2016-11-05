@@ -91,7 +91,8 @@ void train(state s, double trueVal)
 	
 	weights[7]=weights[7]+learningR*2*(trueVal-evaluation)*ss;	
 	weights[8]=weights[8]+learningR*2*(trueVal-evaluation)*oneremaining1;
-	weights[9]=weights[9]+learningR*2*(trueVal-evaluation)*oneremaining2;
+
+	weights[9]=weights[9]+learningR*(-2)*(trueVal-evaluation)*oneremaining2;
 
 	weights[10]=weights[10]+learningR*(-2)*(trueVal-evaluation)*(facefeat20);  //-facefeat20
 	weights[11]=weights[11]+learningR*(-2)*(trueVal-evaluation)*(facefeat21);  //-facefeat21
@@ -937,11 +938,13 @@ double evalFxn(state s)
 	ss=straightStones(s);
 	oneremaining1=oneRemaining(s,1);
 	oneremaining2=oneRemaining(s,2);
+	facefeat(s,1);
+	facefeat(s,2);
 	/*cerr<<"facefeatures= "<<facefeat10<<endl;
 	cerr<<"influence= "<<influence0<<endl;
 	cerr<<"straightstones= "<<ss<<endl;
 	*/
-	val=weights[0]*influence0+weights[1]*influence1+weights[2]*influence2+weights[3]*facefeat10-weights[10]*facefeat20+weights[4]*facefeat11-weights[11]*facefeat21+weights[5]*facefeat12-weights[12]*facefeat22+weights[6]*facefeat13-weights[13]*facefeat23+weights[7]*ss+weights[8]*oneremaining1+weights[9]*oneremaining2;
+	val=weights[0]*influence0+weights[1]*influence1+weights[2]*influence2+weights[3]*facefeat10-weights[10]*facefeat20+weights[4]*facefeat11-weights[11]*facefeat21+weights[5]*facefeat12-weights[12]*facefeat22+weights[6]*facefeat13-weights[13]*facefeat23+weights[7]*ss+weights[8]*oneremaining1-weights[9]*oneremaining2;
 	//cerr<<val<<endl;
 	return val ;   //returns a evaluation of state
 }
