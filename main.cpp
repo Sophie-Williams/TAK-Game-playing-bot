@@ -6,15 +6,17 @@
 #include "nextstate.h"
 using namespace std;
 
-int ply=3;
+int ply=5;
 int boardSize=5; 
 bool ourCapRem =true;
 bool oppoCapRem=true;  
-int ourStonesRem=20; 
+int ourStonesRem=21; 
 int oppoStonesRem=21;
 int playerNum=1;
 double myremTime;
+double totalTime; 
 int movNumber=0;
+int totState=0;  
 state nextMov(boardSize);
 bool isTerminal(state &s)
 {
@@ -224,15 +226,15 @@ double minVal(state &curr, double alpha, double beta);
 double maxVal(state &curr, double alpha, double beta)
 {
    if(checkRoadWin(curr,2))  //oppnonent road win
-   {
+   {     totState++; 
          return -10000000;
    }
    if(checkRoadWin(curr,1))   // our road win
-   {
+   {	totState++; 
    		return 10000000 ;
    }
    if(isTerminal(curr))
-   {
+   {	totState++; 
    		//call state evaluation fxn; 
    		return evalFxn(curr);  //return state evaluation fxn
    }
@@ -262,15 +264,15 @@ double maxVal(state &curr, double alpha, double beta)
 double minVal(state &curr, double alpha, double beta)
 {
 	if(checkRoadWin(curr,1))   // our road win
-   {
+   {	totState++; 
    		return 10000000 ;
    }
    if(checkRoadWin(curr,2))  //oppnonent road win
-   {
+   {	totState++; 
    		return -10000000;
    }
    if(isTerminal(curr))
-   {
+   {	totState++; 
    		//call state evaluation fxn; 
    		return evalFxn(curr) ;  //return state evaluation fxn
    }
@@ -294,7 +296,7 @@ return currEval;
 }
 
 state alphabetaPruning(state curr)
-{     
+{  totState= 0 ;   
    curr.depth=0 ;
    state temp(boardSize);
    nextMov=temp; 
@@ -302,8 +304,8 @@ state alphabetaPruning(state curr)
      //if not found , call for maxVal
     double result =maxVal(curr,LONG_MIN,LONG_MAX) ;
     cerr<<"value of state"<<result<<endl; 
-    train(curr, result);
-    
+    //train(curr, result);
+    cerr<<"Total States: "<<totState<<endl; 
 
    
     return nextMov ;
@@ -339,6 +341,7 @@ int main()
    {
       myremTime= myremTime*10+ (int)(ab[i+4]-48) ;
    }
+   totalTime=myremTime; 
    clock_t start = clock();
    state current= firstMove(initial,(ab[0]-48));
    clock_t end = clock();
@@ -357,11 +360,19 @@ int main()
         start = clock();
         try
         {
+        	if(myremTime<0.8*totalTime && myremTime>0.2*totalTime)
+        	{
+        		ply= 5; 
+        	}
+        	else 
+        	{
+        		ply= 3; 
+        	}
             current= alphabetaPruning(current);
             if(checkRoadWin(current,1))
             {
             	cerr<<"winning"<<endl;
-               writeWeights(); 
+               //writeWeights(); 
             }
             printMove(current);
 

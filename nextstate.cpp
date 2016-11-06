@@ -494,12 +494,25 @@ vector<state> nextstate(state &curr)  //decide on the moves here
            temp2.parent= &curr ;      
            if(ourStonesRem>0)
            {
+            if(ourStonesRem>1)
+            {
             temp.boardState[i][j].push_back(t) ;    // flat stone
             temp.printM="F"+my_map2[j+1]+my_map3[boardSize-i]; 
             temp1.boardState[i][j].push_back(p) ;
             temp1.printM="S"+my_map2[j+1]+my_map3[boardSize-i];
             nextS.push_back(temp) ;
             nextS.push_back(temp1); 
+            }
+            else 
+            {
+              temp.boardState[i][j].push_back(t) ;    // flat stone
+              temp.printM="F"+my_map2[j+1]+my_map3[boardSize-i];
+              if(checkRoadWin(temp,1))
+              {
+                nextS.push_back(temp);
+              } 
+            }
+
            }        
            if(ourCapRem)
            {
