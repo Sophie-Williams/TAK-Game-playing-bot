@@ -80,7 +80,14 @@ void train(state s, double trueVal)
 	double evaluation= evalFxn(s); 
 
 //val=weights[0]*influence0+weights[1]*influence1+weights[2]*influence2+weights[3]*(facefeat10-facefeat20)+weights[4]*(facefeat11-facefeat21)+weights[5]*(facefeat12-facefeat22)+weights[6]*(facefeat13-facefeat23)+weights[7]*ss+weights[8]*oneremaining1+weights[9]*oneremaining2;
-
+	if(trueVal==10000000)
+	{
+		trueVal=9000; 
+	}
+	else if(trueVal==-10000000)
+	{
+		trueVal=-9000;
+	}	
 	weights[0]=weights[0]+learningR*2*(trueVal-evaluation)*influence0;
 	weights[1]=weights[1]+learningR*2*(trueVal-evaluation)*influence1; 
 	weights[2]=weights[2]+learningR*2*(trueVal-evaluation)*influence2; 
@@ -92,12 +99,12 @@ void train(state s, double trueVal)
 	weights[7]=weights[7]+learningR*2*(trueVal-evaluation)*ss;	
 	weights[8]=weights[8]+learningR*2*(trueVal-evaluation)*oneremaining1;
 
-	weights[9]=weights[9]+learningR*(-2)*(trueVal-evaluation)*oneremaining2;
+	weights[9]=weights[9]+learningR*(2)*(trueVal-evaluation)*oneremaining2;
 
-	weights[10]=weights[10]+learningR*(-2)*(trueVal-evaluation)*(facefeat20);  //-facefeat20
-	weights[11]=weights[11]+learningR*(-2)*(trueVal-evaluation)*(facefeat21);  //-facefeat21
-	weights[12]=weights[12]+learningR*(-2)*(trueVal-evaluation)*(facefeat22);  //-facefeat22 
-	weights[13]=weights[13]+learningR*(-2)*(trueVal-evaluation)*(facefeat23);  //-facefeat23
+	weights[10]=weights[10]+learningR*(2)*(trueVal-evaluation)*(facefeat20);  //-facefeat20
+	weights[11]=weights[11]+learningR*(2)*(trueVal-evaluation)*(facefeat21);  //-facefeat21
+	weights[12]=weights[12]+learningR*(2)*(trueVal-evaluation)*(facefeat22);  //-facefeat22 
+	weights[13]=weights[13]+learningR*(2)*(trueVal-evaluation)*(facefeat23);  //-facefeat23
 	cerr<<"own features values"<<facefeat10<<" "<<facefeat11<<" "<<facefeat12<<" "<<facefeat13<<endl;
 	cerr<<"ffeatures values"<<facefeat20<<" "<<facefeat21<<" "<<facefeat22<<" "<<facefeat23<<endl;
 
@@ -276,6 +283,77 @@ void facefeat(state &s, int num) //returns the number of facing stones
 	//return weights[3]*flat+weights[4]*standing+weights[5]*cap+weights[6]*cum;
 }
 
+vector<tuple<int,int> > neighboursnew(state &s, tuple<int,int> t, int who)		//returns neighbours with flat or standing or cap
+{
+	int n= s.boardState.size();
+	vector<tuple<int,int> > result;
+	int stoneNum;
+	int row=get<0>(t);
+	int column=get<1>(t);
+	int p,q,r;
+	if(who==1){
+		p=1;
+		q=3;
+		r=5;
+	}
+	else{
+		p=2;
+		q=4;
+		r=6;
+	}
+
+	if(row!=0)
+	{
+		if(s.boardState[row-1][column].size()==0)
+			goto l2 ;
+		stoneNum=s.boardState[row-1][column][s.boardState[row-1][column].size()-1];	
+		if(stoneNum==p  ||  stoneNum==q || stoneNum==r)
+		{
+			result.push_back(make_tuple(row-1,column));
+		}
+	}
+	l2: ;
+	if(row!=n-1)
+	{
+		if(s.boardState[row+1][column].size()==0)
+			goto l3 ;
+		
+		stoneNum=s.boardState[row+1][column][s.boardState[row+1][column].size()-1];	
+		if(stoneNum==p  ||  stoneNum==q || stoneNum==r)
+		{
+			result.push_back(make_tuple(row+1,column));
+		}
+	}
+	l3:;
+
+	if(column!=0)
+	{
+		if(s.boardState[row][column-1].size()==0)
+			goto l4 ;
+		
+		stoneNum=s.boardState[row][column-1][s.boardState[row][column-1].size()-1];	
+		if(stoneNum==p  || stoneNum==q || stoneNum==r)
+		{
+			result.push_back(make_tuple(row,column-1));
+		}
+	}
+	l4:;
+
+	if(column!=n-1)
+	{	
+		if(s.boardState[row][column+1].size()==0)
+			goto l5 ;
+		
+		stoneNum=s.boardState[row][column+1][s.boardState[row][column+1].size()-1];	
+		if(stoneNum==p || stoneNum==q || stoneNum==r)
+		{
+			result.push_back(make_tuple(row,column+1));
+		}
+	}
+	l5:;
+	return result;
+	
+}
 vector<tuple<int,int> > neighbours(state &s, tuple<int,int> t, int who)		//returns neighbours with flat or cap
 {
 	int n= s.boardState.size();
@@ -946,7 +1024,7 @@ double evalFxn(state s)
 	cerr<<"influence= "<<influence0<<endl;
 	cerr<<"straightstones= "<<ss<<endl;
 	*/
-	val=weights[0]*influence0+weights[1]*influence1+weights[2]*influence2+weights[3]*facefeat10-weights[10]*facefeat20+weights[4]*facefeat11-weights[11]*facefeat21+weights[5]*facefeat12-weights[12]*facefeat22+weights[6]*facefeat13-weights[13]*facefeat23+weights[7]*ss+weights[8]*oneremaining1-weights[9]*oneremaining2;
+	val=weights[0]*influence0+weights[1]*influence1+weights[2]*influence2+weights[3]*facefeat10+weights[10]*facefeat20+weights[4]*facefeat11+weights[11]*facefeat21+weights[5]*facefeat12+weights[12]*facefeat22+weights[6]*facefeat13+weights[13]*facefeat23+weights[7]*ss+weights[8]*oneremaining1+weights[9]*oneremaining2;
 	//cerr<<val<<endl;
 	return val ;   //returns a evaluation of state
 }

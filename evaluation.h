@@ -14,3 +14,4 @@ double oneRemaining(state &s, int num);
 double evalFxn(state s);
 void train(state s, double trueVal);
 void writeWeights();
+vector<tuple<int,int> > neighboursnew(state &s, tuple<int,int> t, int who) ;

@@ -248,7 +248,7 @@ double maxVal(state &curr, double alpha, double beta)
    	  	{
             currEval=temp ;
    	      if(curr.depth==0)
-            {
+            {	//cerr<<"MoVe Selected"<<endl; 
                nextMov=next[i]; 
             } 
          } 
@@ -304,7 +304,8 @@ state alphabetaPruning(state curr)
      //if not found , call for maxVal
     double result =maxVal(curr,LONG_MIN,LONG_MAX) ;
     cerr<<"value of state"<<result<<endl; 
-    //train(curr, result);
+    train(curr, result);
+    cerr<<"Ply Followed"<<ply<<endl ;
     cerr<<"Total States: "<<totState<<endl; 
 
    
@@ -350,19 +351,20 @@ int main()
    movNumber=1;
    //state present(boardSize);
    while(true)
-   {
+   {	
        string opponentmove; 
         if(movNumber!=1||ab[0]-48==2)
         {
             cin>>opponentmove;
+           	start = clock();
             current = changeArray(current, opponentNum, opponentmove);
         }
-        start = clock();
+        
         try
         {
-        	if(myremTime<0.8*totalTime && myremTime>0.2*totalTime)
+        	if(myremTime<0.9*totalTime && myremTime>0.1*totalTime)
         	{
-        		ply= 5; 
+        		ply= 3; 
         	}
         	else 
         	{
@@ -372,7 +374,7 @@ int main()
             if(checkRoadWin(current,1))
             {
             	cerr<<"winning"<<endl;
-               //writeWeights(); 
+               writeWeights(); 
             }
             printMove(current);
 
@@ -382,7 +384,8 @@ int main()
             current= myMove(current);
         }
         end = clock();
-        myremTime=myremTime-(end-start)/CLOCKS_PER_SEC;
+        //cerr<<start<<" "<<end<<" "<<CLOCKS_PER_SEC<<endl ;
+        myremTime=myremTime-(double)(end-start)/CLOCKS_PER_SEC;
         cerr<<myremTime<<endl;
         movNumber=movNumber+1; 
       

@@ -494,7 +494,7 @@ vector<state> nextstate(state &curr)  //decide on the moves here
            temp2.parent= &curr ;      
            if(ourStonesRem>0)
            {
-            if(ourStonesRem>1)
+            if(ourStonesRem>1||!(neighboursnew(curr,make_tuple(i,j),1).size()==0)||!(neighboursnew(curr,make_tuple(i,j),2).size()==0))
             {
             temp.boardState[i][j].push_back(t) ;    // flat stone
             temp.printM="F"+my_map2[j+1]+my_map3[boardSize-i]; 

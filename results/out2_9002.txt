@@ -1,0 +1,408 @@
+You are player 2
+You are alloted a time of 120s
+
+Current turn: Player 1
+Player 1 unplayed pieces: 21F, 1C
+Player 2 unplayed pieces: 21F, 1C
+
+[96m5[0m                                                                             
+[96m4[0m                                                                             
+[96m3[0m                                                                             
+[96m2[0m                                                                             
+[96m1[0m                                                                             
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+The other player played Fe1
+Current turn: Player 2
+Player 1 unplayed pieces: 21F, 1C
+Player 2 unplayed pieces: 20F, 1C
+
+[96m5[0m                                                                             
+[96m4[0m                                                                             
+[96m3[0m                                                                             
+[96m2[0m                                                                             
+[96m1[0m                                                                     [91mF[0m       
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+Time remaining is: 120s
+You played Fe2
+Current turn: Player 1
+Player 1 unplayed pieces: 20F, 1C
+Player 2 unplayed pieces: 20F, 1C
+
+[96m5[0m                                                                             
+[96m4[0m                                                                             
+[96m3[0m                                                                             
+[96m2[0m                                                                     [93mF[0m       
+[96m1[0m                                                                     [91mF[0m       
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+The other player played Fb3
+Current turn: Player 2
+Player 1 unplayed pieces: 19F, 1C
+Player 2 unplayed pieces: 20F, 1C
+
+[96m5[0m                                                                             
+[96m4[0m                                                                             
+[96m3[0m                        [93mF[0m                                                    
+[96m2[0m                                                                     [93mF[0m       
+[96m1[0m                                                                     [91mF[0m       
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+Time remaining is: 120s
+You played Fd3
+Current turn: Player 1
+Player 1 unplayed pieces: 19F, 1C
+Player 2 unplayed pieces: 19F, 1C
+
+[96m5[0m                                                                             
+[96m4[0m                                                                             
+[96m3[0m                        [93mF[0m                             [91mF[0m                      
+[96m2[0m                                                                     [93mF[0m       
+[96m1[0m                                                                     [91mF[0m       
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+The other player played Fb2
+Current turn: Player 2
+Player 1 unplayed pieces: 18F, 1C
+Player 2 unplayed pieces: 19F, 1C
+
+[96m5[0m                                                                             
+[96m4[0m                                                                             
+[96m3[0m                        [93mF[0m                             [91mF[0m                      
+[96m2[0m                        [93mF[0m                                            [93mF[0m       
+[96m1[0m                                                                     [91mF[0m       
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+Time remaining is: 120s
+You played Fc4
+Current turn: Player 1
+Player 1 unplayed pieces: 18F, 1C
+Player 2 unplayed pieces: 18F, 1C
+
+[96m5[0m                                                                             
+[96m4[0m                                       [91mF[0m                                     
+[96m3[0m                        [93mF[0m                             [91mF[0m                      
+[96m2[0m                        [93mF[0m                                            [93mF[0m       
+[96m1[0m                                                                     [91mF[0m       
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+The other player played Fb5
+Current turn: Player 2
+Player 1 unplayed pieces: 17F, 1C
+Player 2 unplayed pieces: 18F, 1C
+
+[96m5[0m                        [93mF[0m                                                    
+[96m4[0m                                       [91mF[0m                                     
+[96m3[0m                        [93mF[0m                             [91mF[0m                      
+[96m2[0m                        [93mF[0m                                            [93mF[0m       
+[96m1[0m                                                                     [91mF[0m       
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+Time remaining is: 119s
+You played Fd4
+Current turn: Player 1
+Player 1 unplayed pieces: 17F, 1C
+Player 2 unplayed pieces: 17F, 1C
+
+[96m5[0m                        [93mF[0m                                                    
+[96m4[0m                                       [91mF[0m              [91mF[0m                      
+[96m3[0m                        [93mF[0m                             [91mF[0m                      
+[96m2[0m                        [93mF[0m                                            [93mF[0m       
+[96m1[0m                                                                     [91mF[0m       
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+The other player played Cb4
+Current turn: Player 2
+Player 1 unplayed pieces: 17F, 0C
+Player 2 unplayed pieces: 17F, 1C
+
+[96m5[0m                        [93mF[0m                                                    
+[96m4[0m                        [93mC[0m              [91mF[0m              [91mF[0m                      
+[96m3[0m                        [93mF[0m                             [91mF[0m                      
+[96m2[0m                        [93mF[0m                                            [93mF[0m       
+[96m1[0m                                                                     [91mF[0m       
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+Time remaining is: 118s
+You played Fb1
+Current turn: Player 1
+Player 1 unplayed pieces: 17F, 0C
+Player 2 unplayed pieces: 16F, 1C
+
+[96m5[0m                        [93mF[0m                                                    
+[96m4[0m                        [93mC[0m              [91mF[0m              [91mF[0m                      
+[96m3[0m                        [93mF[0m                             [91mF[0m                      
+[96m2[0m                        [93mF[0m                                            [93mF[0m       
+[96m1[0m                        [91mF[0m                                            [91mF[0m       
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+The other player played Fc1
+Current turn: Player 2
+Player 1 unplayed pieces: 16F, 0C
+Player 2 unplayed pieces: 16F, 1C
+
+[96m5[0m                        [93mF[0m                                                    
+[96m4[0m                        [93mC[0m              [91mF[0m              [91mF[0m                      
+[96m3[0m                        [93mF[0m                             [91mF[0m                      
+[96m2[0m                        [93mF[0m                                            [93mF[0m       
+[96m1[0m                        [91mF[0m              [93mF[0m                             [91mF[0m       
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+Time remaining is: 117s
+You played 1b1+1
+Current turn: Player 1
+Player 1 unplayed pieces: 16F, 0C
+Player 2 unplayed pieces: 16F, 1C
+
+[96m5[0m                        [93mF[0m                                                    
+[96m4[0m                        [93mC[0m              [91mF[0m              [91mF[0m                      
+[96m3[0m                        [93mF[0m                             [91mF[0m                      
+[96m2[0m                       [93mF[0m[91mF[0m                                            [93mF[0m       
+[96m1[0m                                       [93mF[0m                             [91mF[0m       
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+The other player played Fc2
+Current turn: Player 2
+Player 1 unplayed pieces: 15F, 0C
+Player 2 unplayed pieces: 16F, 1C
+
+[96m5[0m                        [93mF[0m                                                    
+[96m4[0m                        [93mC[0m              [91mF[0m              [91mF[0m                      
+[96m3[0m                        [93mF[0m                             [91mF[0m                      
+[96m2[0m                       [93mF[0m[91mF[0m              [93mF[0m                             [93mF[0m       
+[96m1[0m                                       [93mF[0m                             [91mF[0m       
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+Time remaining is: 117s
+You played Fc3
+Current turn: Player 1
+Player 1 unplayed pieces: 15F, 0C
+Player 2 unplayed pieces: 15F, 1C
+
+[96m5[0m                        [93mF[0m                                                    
+[96m4[0m                        [93mC[0m              [91mF[0m              [91mF[0m                      
+[96m3[0m                        [93mF[0m              [91mF[0m              [91mF[0m                      
+[96m2[0m                       [93mF[0m[91mF[0m              [93mF[0m                             [93mF[0m       
+[96m1[0m                                       [93mF[0m                             [91mF[0m       
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+The other player played Fa2
+Current turn: Player 2
+Player 1 unplayed pieces: 14F, 0C
+Player 2 unplayed pieces: 15F, 1C
+
+[96m5[0m                        [93mF[0m                                                    
+[96m4[0m                        [93mC[0m              [91mF[0m              [91mF[0m                      
+[96m3[0m                        [93mF[0m              [91mF[0m              [91mF[0m                      
+[96m2[0m         [93mF[0m             [93mF[0m[91mF[0m              [93mF[0m                             [93mF[0m       
+[96m1[0m                                       [93mF[0m                             [91mF[0m       
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+Time remaining is: 115s
+You played 1c3<1
+Current turn: Player 1
+Player 1 unplayed pieces: 14F, 0C
+Player 2 unplayed pieces: 15F, 1C
+
+[96m5[0m                        [93mF[0m                                                    
+[96m4[0m                        [93mC[0m              [91mF[0m              [91mF[0m                      
+[96m3[0m                       [93mF[0m[91mF[0m                             [91mF[0m                      
+[96m2[0m         [93mF[0m             [93mF[0m[91mF[0m              [93mF[0m                             [93mF[0m       
+[96m1[0m                                       [93mF[0m                             [91mF[0m       
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+The other player played Fd2
+Current turn: Player 2
+Player 1 unplayed pieces: 13F, 0C
+Player 2 unplayed pieces: 15F, 1C
+
+[96m5[0m                        [93mF[0m                                                    
+[96m4[0m                        [93mC[0m              [91mF[0m              [91mF[0m                      
+[96m3[0m                       [93mF[0m[91mF[0m                             [91mF[0m                      
+[96m2[0m         [93mF[0m             [93mF[0m[91mF[0m              [93mF[0m              [93mF[0m              [93mF[0m       
+[96m1[0m                                       [93mF[0m                             [91mF[0m       
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+Time remaining is: 115s
+You played Fe4
+Current turn: Player 1
+Player 1 unplayed pieces: 13F, 0C
+Player 2 unplayed pieces: 14F, 1C
+
+[96m5[0m                        [93mF[0m                                                    
+[96m4[0m                        [93mC[0m              [91mF[0m              [91mF[0m              [91mF[0m       
+[96m3[0m                       [93mF[0m[91mF[0m                             [91mF[0m                      
+[96m2[0m         [93mF[0m             [93mF[0m[91mF[0m              [93mF[0m              [93mF[0m              [93mF[0m       
+[96m1[0m                                       [93mF[0m                             [91mF[0m       
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+The other player played Fb1
+Current turn: Player 2
+Player 1 unplayed pieces: 12F, 0C
+Player 2 unplayed pieces: 14F, 1C
+
+[96m5[0m                        [93mF[0m                                                    
+[96m4[0m                        [93mC[0m              [91mF[0m              [91mF[0m              [91mF[0m       
+[96m3[0m                       [93mF[0m[91mF[0m                             [91mF[0m                      
+[96m2[0m         [93mF[0m             [93mF[0m[91mF[0m              [93mF[0m              [93mF[0m              [93mF[0m       
+[96m1[0m                        [93mF[0m              [93mF[0m                             [91mF[0m       
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+Time remaining is: 113s
+You played 1e1+1
+Current turn: Player 1
+Player 1 unplayed pieces: 12F, 0C
+Player 2 unplayed pieces: 14F, 1C
+
+[96m5[0m                        [93mF[0m                                                    
+[96m4[0m                        [93mC[0m              [91mF[0m              [91mF[0m              [91mF[0m       
+[96m3[0m                       [93mF[0m[91mF[0m                             [91mF[0m                      
+[96m2[0m         [93mF[0m             [93mF[0m[91mF[0m              [93mF[0m              [93mF[0m             [93mF[0m[91mF[0m       
+[96m1[0m                        [93mF[0m              [93mF[0m                                     
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+The other player played Fa3
+Current turn: Player 2
+Player 1 unplayed pieces: 11F, 0C
+Player 2 unplayed pieces: 14F, 1C
+
+[96m5[0m                        [93mF[0m                                                    
+[96m4[0m                        [93mC[0m              [91mF[0m              [91mF[0m              [91mF[0m       
+[96m3[0m         [93mF[0m             [93mF[0m[91mF[0m                             [91mF[0m                      
+[96m2[0m         [93mF[0m             [93mF[0m[91mF[0m              [93mF[0m              [93mF[0m             [93mF[0m[91mF[0m       
+[96m1[0m                        [93mF[0m              [93mF[0m                                     
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+Time remaining is: 112s
+You played Fd5
+Current turn: Player 1
+Player 1 unplayed pieces: 11F, 0C
+Player 2 unplayed pieces: 13F, 1C
+
+[96m5[0m                        [93mF[0m                             [91mF[0m                      
+[96m4[0m                        [93mC[0m              [91mF[0m              [91mF[0m              [91mF[0m       
+[96m3[0m         [93mF[0m             [93mF[0m[91mF[0m                             [91mF[0m                      
+[96m2[0m         [93mF[0m             [93mF[0m[91mF[0m              [93mF[0m              [93mF[0m             [93mF[0m[91mF[0m       
+[96m1[0m                        [93mF[0m              [93mF[0m                                     
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+The other player played Fa1
+Current turn: Player 2
+Player 1 unplayed pieces: 10F, 0C
+Player 2 unplayed pieces: 13F, 1C
+
+[96m5[0m                        [93mF[0m                             [91mF[0m                      
+[96m4[0m                        [93mC[0m              [91mF[0m              [91mF[0m              [91mF[0m       
+[96m3[0m         [93mF[0m             [93mF[0m[91mF[0m                             [91mF[0m                      
+[96m2[0m         [93mF[0m             [93mF[0m[91mF[0m              [93mF[0m              [93mF[0m             [93mF[0m[91mF[0m       
+[96m1[0m         [93mF[0m              [93mF[0m              [93mF[0m                                     
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+Time remaining is: 110s
+You played Fa4
+Current turn: Player 1
+Player 1 unplayed pieces: 10F, 0C
+Player 2 unplayed pieces: 12F, 1C
+
+[96m5[0m                        [93mF[0m                             [91mF[0m                      
+[96m4[0m         [91mF[0m              [93mC[0m              [91mF[0m              [91mF[0m              [91mF[0m       
+[96m3[0m         [93mF[0m             [93mF[0m[91mF[0m                             [91mF[0m                      
+[96m2[0m         [93mF[0m             [93mF[0m[91mF[0m              [93mF[0m              [93mF[0m             [93mF[0m[91mF[0m       
+[96m1[0m         [93mF[0m              [93mF[0m              [93mF[0m                                     
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+The other player played 1b1+1
+Current turn: Player 2
+Player 1 unplayed pieces: 10F, 0C
+Player 2 unplayed pieces: 12F, 1C
+
+[96m5[0m                        [93mF[0m                             [91mF[0m                      
+[96m4[0m         [91mF[0m              [93mC[0m              [91mF[0m              [91mF[0m              [91mF[0m       
+[96m3[0m         [93mF[0m             [93mF[0m[91mF[0m                             [91mF[0m                      
+[96m2[0m         [93mF[0m             [93mF[0m[91mF[0m[93mF[0m             [93mF[0m              [93mF[0m             [93mF[0m[91mF[0m       
+[96m1[0m         [93mF[0m                             [93mF[0m                                     
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+Time remaining is: 108s
+You played 1a4-1
+Current turn: Player 1
+Player 1 unplayed pieces: 10F, 0C
+Player 2 unplayed pieces: 12F, 1C
+
+[96m5[0m                        [93mF[0m                             [91mF[0m                      
+[96m4[0m                        [93mC[0m              [91mF[0m              [91mF[0m              [91mF[0m       
+[96m3[0m        [93mF[0m[91mF[0m             [93mF[0m[91mF[0m                             [91mF[0m                      
+[96m2[0m         [93mF[0m             [93mF[0m[91mF[0m[93mF[0m             [93mF[0m              [93mF[0m             [93mF[0m[91mF[0m       
+[96m1[0m         [93mF[0m                             [93mF[0m                                     
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+The other player played 2b2+2
+Current turn: Player 2
+Player 1 unplayed pieces: 10F, 0C
+Player 2 unplayed pieces: 12F, 1C
+
+[96m5[0m                        [93mF[0m                             [91mF[0m                      
+[96m4[0m                        [93mC[0m              [91mF[0m              [91mF[0m              [91mF[0m       
+[96m3[0m        [93mF[0m[91mF[0m            [93mF[0m[91mF[0m[91mF[0m[93mF[0m                            [91mF[0m                      
+[96m2[0m         [93mF[0m              [93mF[0m              [93mF[0m              [93mF[0m             [93mF[0m[91mF[0m       
+[96m1[0m         [93mF[0m                             [93mF[0m                                     
+          [96ma[0m              [96mb[0m              [96mc[0m              [96md[0m              [96me[0m       
+
+
+
+YOU LOSE :(
