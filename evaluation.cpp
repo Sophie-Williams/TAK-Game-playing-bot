@@ -8,23 +8,23 @@ using namespace std;
 
 vector<int> weights;
 double learningR=0.00025; 
-/*double *facefeatures;
-double *facefeatures2;
-double *influenceval;
-*/
+double influence10;
+double influence11;
+
+double influence20;
+double influence21;
+
 double facefeat10;
 double facefeat11;
 double facefeat12;
 double facefeat13;
+double facefeat14;
 
 double facefeat20;
 double facefeat21;
 double facefeat22;
 double facefeat23;
-
-double influence0;
-double influence1;
-double influence2;
+double facefeat24;
 
 double ss;
 double oneremaining1;
@@ -66,22 +66,11 @@ void initialWeights(int player)
     }
     ifile.close();
     cerr<<weights.size()<<endl;
-	/*weights.resize(10);
-	weights[0]=5; //in influence
-	weights[1]=5; //in influence
-	weights[2]=5; //in influence
-	weights[3]=20; //num flat
-	weights[4]=0; //num standing 
-	weights[5]=10; //num cap
-	weights[6]=10; //num cumulativestones in stacks
-	weights[7]=40; //straightstones
-	weights[8]=100; //oneremaining
-	*/
 }
 
 void train(state s, double trueVal)
 {
-	double evaluation= evalFxn(s); 
+	/*double evaluation= evalFxn(s); 
 
 //val=weights[0]*influence0+weights[1]*influence1+weights[2]*influence2+weights[3]*(facefeat10-facefeat20)+weights[4]*(facefeat11-facefeat21)+weights[5]*(facefeat12-facefeat22)+weights[6]*(facefeat13-facefeat23)+weights[7]*ss+weights[8]*oneremaining1+weights[9]*oneremaining2;
 	if(trueVal==10000000)
@@ -99,126 +88,214 @@ void train(state s, double trueVal)
 	weights[4]=weights[4]+learningR*2*(trueVal-evaluation)*(facefeat11);  //-facefeat21
 	weights[5]=weights[5]+learningR*2*(trueVal-evaluation)*(facefeat12);  //-facefeat22 
 	weights[6]=weights[6]+learningR*2*(trueVal-evaluation)*(facefeat13);  //-facefeat23
-	
-	weights[7]=weights[7]+learningR*2*(trueVal-evaluation)*ss;	
-	weights[8]=weights[8]+learningR*2*(trueVal-evaluation)*oneremaining1;
+	weights[7]=weights[7]+learningR*2*(trueVal-evaluation)*(facefeat14);  //-facefeat24
 
-	weights[9]=weights[9]+learningR*(2)*(trueVal-evaluation)*oneremaining2;
 
-	weights[10]=weights[10]+learningR*(2)*(trueVal-evaluation)*(facefeat20);  //-facefeat20
-	weights[11]=weights[11]+learningR*(2)*(trueVal-evaluation)*(facefeat21);  //-facefeat21
-	weights[12]=weights[12]+learningR*(2)*(trueVal-evaluation)*(facefeat22);  //-facefeat22 
-	weights[13]=weights[13]+learningR*(2)*(trueVal-evaluation)*(facefeat23);  //-facefeat23
+	weights[8]=weights[8]+learningR*2*(trueVal-evaluation)*ss;	
+	weights[9]=weights[9]+learningR*2*(trueVal-evaluation)*oneremaining1;
+	weights[10]=weights[10]+learningR*(2)*(trueVal-evaluation)*oneremaining2;
+
+	weights[11]=weights[11]+learningR*(2)*(trueVal-evaluation)*(facefeat20);  //-facefeat20
+	weights[12]=weights[12]+learningR*(2)*(trueVal-evaluation)*(facefeat21);  //-facefeat21
+	weights[13]=weights[13]+learningR*(2)*(trueVal-evaluation)*(facefeat22);  //-facefeat22 
+	weights[14]=weights[14]+learningR*(2)*(trueVal-evaluation)*(facefeat23);  //-facefeat23
+	weights[15]=weights[15]+learningR*(2)*(trueVal-evaluation)*(facefeat24);  //-facefeat24
 	cerr<<"own features values"<<facefeat10<<" "<<facefeat11<<" "<<facefeat12<<" "<<facefeat13<<endl;
 	cerr<<"ffeatures values"<<facefeat20<<" "<<facefeat21<<" "<<facefeat22<<" "<<facefeat23<<endl;
-
+*/
 }
 
-void influence(state &s)
+void influence(state &s, int num)
 {
 	double numEmpty=0.0;
 	double numMyStones=0.0;
 	double numOppStones=0.0;
 	double numMySurrOpp=0.0;
 
+	double flat = 0.0 ; 	//represents number of flatstones on top
+	double standing= 0.0 ;
+	double cap= 0.0 ;
+	double hard = 0.0;
+	double soft=0.0;
+	int mystack=0;
+	
 	int n= s.boardState.size();
+
+	int p,q,r;
+	if(num==1)
+	{
+		p= 1 ;
+		q= 3;
+		r= 5 ;	
+	}  
+	else{
+		p= 2 ;
+		q= 4;
+		r= 6 ;	
+	}
 	for (int i=0;i<n;i++)
 	{
 		for (int j=0;j<n;j++)
 		{
-			if(s.boardState[i][j].size()!=0)
+			double cum=0.0;
+			double cumopponent=0.0;
+			vector<int> temp=s.boardState[i][j];
+			if(temp.size()!=0)
 			{
-				int stoneNumber=s.boardState[i][j][s.boardState[i][j].size()-1];
-				if(stoneNumber==1 || stoneNumber==3 || stoneNumber==5)
+				int stoneNumber=temp[temp.size()-1];
+				if(stoneNumber==p || stoneNumber==q || stoneNumber==r)
 				{
+					if(stoneNumber==p)
+						flat+=1;
+					else if(stoneNumber==q)
+						standing+=1;
+					else if(stoneNumber==r)
+						cap=1;
+
 					if(i!=0){
-						if(s.boardState[i-1][j].size()==0)
+						vector<int> t= s.boardState[i-1][j];
+						if(t.size()==0)
 							numEmpty+=1;
 						else{
-							stoneNumber=s.boardState[i-1][j][s.boardState[i-1][j].size()-1];
-							if(stoneNumber==1 || stoneNumber==3 || stoneNumber==5)
+							stoneNumber=t[t.size()-1];
+							if(stoneNumber==p || stoneNumber==q || stoneNumber==r)
 								numMyStones+=1;
 							else
 								numOppStones+=1;
 						}
 					}
 					if(i!=n-1){
-						if(s.boardState[i+1][j].size()==0)
+						vector<int> t= s.boardState[i+1][j];
+						if(t.size()==0)
 							numEmpty+=1;
 						else{
-							stoneNumber=s.boardState[i+1][j][s.boardState[i+1][j].size()-1];
-							if(stoneNumber==1 || stoneNumber==3 || stoneNumber==5)
+							stoneNumber=t[t.size()-1];
+							if(stoneNumber==p || stoneNumber==q || stoneNumber==r)
 								numMyStones+=1;
 							else
 								numOppStones+=1;
 						}
 					}
 					if(j!=0){
-						if(s.boardState[i][j-1].size()==0)
+						vector<int> t = s.boardState[i][j-1];
+						if(t.size()==0)
 							numEmpty+=1;
 						else{
-							stoneNumber=s.boardState[i][j-1][s.boardState[i][j-1].size()-1];
-							if(stoneNumber==1 || stoneNumber==3 || stoneNumber==5)
+							stoneNumber=t[t.size()-1];
+							if(stoneNumber==p || stoneNumber==q || stoneNumber==r)
 								numMyStones+=1;
 							else
 								numOppStones+=1;
 						}
 					}
 					if(j!=n-1){
-						if(s.boardState[i][j+1].size()==0)
+						vector<int> t = s.boardState[i][j+1];
+						if(t.size()==0)
 							numEmpty+=1;
 						else{
-							stoneNumber=s.boardState[i][j+1][s.boardState[i][j+1].size()-1];
-							if(stoneNumber==1 || stoneNumber==3 || stoneNumber==5)
+							stoneNumber=t[t.size()-1];
+							if(stoneNumber==p || stoneNumber==q || stoneNumber==r)
 								numMyStones+=1;
 							else
 								numOppStones+=1;
 						}
 					}
 				}
-				else if(stoneNumber==2 || stoneNumber==4 || stoneNumber==6)
+				/*else
 				{
 					if(i!=0){
-						if(s.boardState[i-1][j].size()!=0){
-							stoneNumber=s.boardState[i-1][j][s.boardState[i-1][j].size()-1];
-							if(stoneNumber==1 || stoneNumber==3 || stoneNumber==5)
+						vector<int> t= s.boardState[i-1][j];
+						if(t.size()!=0){
+							stoneNumber=t[t.size()-1];
+							if(stoneNumber==p || stoneNumber==q || stoneNumber==r)
 								numMySurrOpp+=1;
 						}
 					}
 					if(i!=n-1){
-						if(s.boardState[i+1][j].size()!=0){
-							stoneNumber=s.boardState[i+1][j][s.boardState[i+1][j].size()-1];
-							if(stoneNumber==1 || stoneNumber==3 || stoneNumber==5)
+						vector<int> t= s.boardState[i+1][j];
+						if(t.size()!=0){
+							stoneNumber=t[t.size()-1];
+							if(stoneNumber==p || stoneNumber==q || stoneNumber==r)
 								numMySurrOpp+=1;
 						}
 					}
 					if(j!=0){
-						if(s.boardState[i][j-1].size()!=0){
-							stoneNumber=s.boardState[i][j-1][s.boardState[i][j-1].size()-1];
-							if(stoneNumber==1 || stoneNumber==3 || stoneNumber==5)
+						vector<int> t = s.boardState[i][j-1];
+						if(t.size()!=0){
+							stoneNumber=t[t.size()-1];
+							if(stoneNumber==p || stoneNumber==q || stoneNumber==r)
 								numMySurrOpp+=1;
 						}
 					}
 					if(j!=n-1){
-						if(s.boardState[i][j+1].size()!=0){
-							stoneNumber=s.boardState[i][j+1][s.boardState[i][j+1].size()-1];
-							if(stoneNumber==1 || stoneNumber==3 || stoneNumber==5)
+						vector<int> t = s.boardState[i][j+1];
+						if(t.size()!=0){
+							stoneNumber=t[t.size()-1];
+							if(stoneNumber==p || stoneNumber==q || stoneNumber==r)
 								numMySurrOpp+=1;
 						}
 					}
+				}*/
+				if(temp.size()>=2)
+				{
+					int top=0; //top 1 means my 
+
+					if(temp[temp.size()-1]==p||temp[temp.size()-1]==q||temp[temp.size()-1]==r)
+					{
+						top=1;
+						mystack+=1;
+					}
+					if(top==1)
+					{
+						int x = temp.size()-boardSize;
+						for(int d=max(0,x);d<temp.size();d++)
+						{
+							if(temp[d]==p||temp[d]==q||temp[d]==r)
+								cum+=1;
+							else
+								cumopponent+=1;
+						}
+					}
+					
+					if(cum>=cumopponent)
+						hard+=cum-cumopponent/2;
+					else
+						soft+=cumopponent-cum/2;
 				}
 			}
 		}
 	}
-	double result[3];
-	influence0=numEmpty;
-	influence1=numMyStones-numOppStones;
-	influence2=numMySurrOpp;
-	//return result;
-	//return double(weights[0]*result[0]+weights[1]*(result[1]-result[2])+weights[2]*result[3]);
+	//double result[3];
+
+	if(num==1)
+	{
+		influence10=numEmpty;
+		influence11=numMyStones-numOppStones;
+
+		facefeat10=flat;
+		facefeat11=standing;
+		facefeat12=cap;
+		facefeat13=hard;
+		facefeat14=soft;
+
+		cerr<<influence10<<" "<<influence11<<" "<<facefeat10<<" "<<facefeat11<<" "<<facefeat12<<" "<<facefeat13<<" "<<facefeat14<<endl;
+	}
+	else
+	{
+		influence20=numEmpty;
+		influence21=numMyStones-numOppStones;
+
+		facefeat20=flat;
+		facefeat21=standing;
+		facefeat22=cap;
+		facefeat23=hard;
+		facefeat24=soft;
+
+		cerr<<influence20<<" "<<influence21<<" "<<facefeat20<<" "<<facefeat21<<" "<<facefeat22<<" "<<facefeat23<<" "<<facefeat24<<endl;
+	}
 }
 
-void facefeat(state &s, int num) //returns the number of facing stones
+/*void facefeat(state &s, int num) //returns the number of facing stones
 {	
 	int p,q,r;
 	if(num==1)
@@ -235,57 +312,80 @@ void facefeat(state &s, int num) //returns the number of facing stones
 	double flat = 0.0 ; 	//represents number of flatstones on top
 	double standing= 0.0 ;
 	double cap= 0.0 ;
-	double cum= 0.0 ;		// in all the stacks the total number of my stones
+	double hard = 0.0;
+	double soft=0.0;
+	//double cum= 0.0 ;		
+	//double cumopponent=0.0;
+	int mystack=0;
 	
 	int boardSize=s.boardState.size();
 	for(int i= 0 ;i<boardSize;i++)
 	{   for(int j=0;j<boardSize;j++)
 		{	
-			if(s.boardState[i][j].size()>0)
+			double cum= 0.0 ;		// in my controlled stack the total number of my stones
+			double cumopponent=0.0;
+			int numstones=s.boardState[i][j].size();
+			if(numstones>0)
 			{	 
-				int y= s.boardState[i][j][s.boardState[i][j].size()-1] ;
+				int y= s.boardState[i][j][numstones-1] ;
 				if(y==p)
 				flat=flat+1;
 				else if(y==q)
-				standing=standing+1;  	
+				standing=standing+1;
 				else if(y==r)
 				cap=1;			
 			}
-			if(s.boardState[i][j].size()>=2)
+			if(numstones>=2)
 			{	
-				for(int d=0;d<s.boardState[i][j].size();d++)
+				int top=0; //top 1 means my and 2 means opponent
+
+				if(s.boardState[i][j][numstones-1]==p||s.boardState[i][j][numstones-1]==q||s.boardState[i][j][numstones-1]==r)
 				{
-					if(s.boardState[i][j][d]==p||s.boardState[i][j][d]==q||s.boardState[i][j][d]==r)
-						cum=cum+1;
+					top=1;
+					mystack+=1;
 				}
+
+				if(top==1)
+				{
+					for(int d=max(0,numstones-boardSize);d<numstones;d++)
+					{
+						if(s.boardState[i][j][d]==p||s.boardState[i][j][d]==q||s.boardState[i][j][d]==r)
+							cum+=1;
+						else
+							cumopponent+=1;
+					}
+				}
+				
+				if(cum>=cumopponent)
+					hard+=cum-cumopponent;
+				else
+					soft+=cumopponent-cum;
 			}
 		}
 	}
-	/*double result[4];
-	result[0]=flat;
-	result[1]=standing;
-	result[2]=cap;
-	result[3]=cum;
-	
-	*///facefeatures=result;
-	//cerr<<num<<" flat "<<flat<<endl;
+
 	if(num==1)
 	{
 		facefeat10=flat;
 		facefeat11=standing;
 		facefeat12=cap;
-		facefeat13=cum;
+		facefeat13=hard;
+		facefeat14=soft;
 	}
 	else
 	{
 		facefeat20=flat;
 		facefeat21=standing;
 		facefeat22=cap;
-		facefeat23=cum;
+		facefeat23=hard;
+		facefeat24=soft;
 	}
+
+	//TODO - return hard and soft values, and also mystack; something like mystack*(hard-soft)
 	//return result;
 	//return weights[3]*flat+weights[4]*standing+weights[5]*cap+weights[6]*cum;
 }
+*/
 
 vector<tuple<int,int> > neighboursnew(state &s, tuple<int,int> t, int who)		//returns neighbours with flat or standing or cap
 {
@@ -1016,19 +1116,20 @@ double evalFxn(state s)
 	double * influenceval;
 	influenceval=influence(s);
 	*/
-	influence(s);
-	facefeat(s,1);
-	facefeat(s,2);
+	influence(s,1);
+	influence(s,2);
+	//facefeat(s,1);
+	//facefeat(s,2);
 	ss=straightStones(s);
 	oneremaining1=oneRemaining(s,1);
 	oneremaining2=oneRemaining(s,2);
-	facefeat(s,1);
-	facefeat(s,2);
+	//facefeat(s,1);
+	//facefeat(s,2);
 	/*cerr<<"facefeatures= "<<facefeat10<<endl;
 	cerr<<"influence= "<<influence0<<endl;
 	cerr<<"straightstones= "<<ss<<endl;
 	*/
-	val=weights[0]*influence0+weights[1]*influence1+weights[2]*influence2+weights[3]*facefeat10+weights[10]*facefeat20+weights[4]*facefeat11+weights[11]*facefeat21+weights[5]*facefeat12+weights[12]*facefeat22+weights[6]*facefeat13+weights[13]*facefeat23+weights[7]*ss+weights[8]*oneremaining1+weights[9]*oneremaining2;
+	val=weights[0]*influence10+weights[1]*influence11+weights[2]*influence20+weights[3]*influence21+weights[4]*facefeat10+weights[5]*facefeat11+weights[6]*facefeat12+weights[7]*facefeat13+weights[8]*facefeat14+weights[9]*facefeat20+weights[10]*facefeat21+weights[11]*facefeat22+weights[12]*facefeat23+weights[13]*facefeat24+weights[14]*ss+weights[15]*oneremaining1+weights[16]*oneremaining2;
 	//cerr<<val<<endl;
 	return val ;   //returns a evaluation of state
 }
