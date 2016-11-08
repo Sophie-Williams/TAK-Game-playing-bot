@@ -278,7 +278,7 @@ void influence(state &s, int num)
 		facefeat13=hard;
 		facefeat14=soft;
 
-		cerr<<influence10<<" "<<influence11<<" "<<facefeat10<<" "<<facefeat11<<" "<<facefeat12<<" "<<facefeat13<<" "<<facefeat14<<endl;
+		//cerr<<influence10<<" "<<influence11<<" "<<facefeat10<<" "<<facefeat11<<" "<<facefeat12<<" "<<facefeat13<<" "<<facefeat14<<endl;
 	}
 	else
 	{
@@ -291,7 +291,7 @@ void influence(state &s, int num)
 		facefeat23=hard;
 		facefeat24=soft;
 
-		cerr<<influence20<<" "<<influence21<<" "<<facefeat20<<" "<<facefeat21<<" "<<facefeat22<<" "<<facefeat23<<" "<<facefeat24<<endl;
+		//cerr<<influence20<<" "<<influence21<<" "<<facefeat20<<" "<<facefeat21<<" "<<facefeat22<<" "<<facefeat23<<" "<<facefeat24<<endl;
 	}
 }
 

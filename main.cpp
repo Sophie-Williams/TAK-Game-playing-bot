@@ -7,7 +7,7 @@
 #include "nextstate.h"
 using namespace std;
 
-int ply=3;
+int ply=4;
 int boardSize=5; 
 bool ourCapRem =true;
 bool oppoCapRem=true;  
@@ -391,11 +391,11 @@ int main()
         {
         	if(myremTime<0.9*totalTime && myremTime>0.1*totalTime)
         	{
-        		ply= 3; 
+        		ply= 4; 
         	}
         	else 
         	{
-        		ply= 3; 
+        		ply= 4; 
         	}
             current= alphabetaPruning(current);
             if(checkRoadWin(current,1))
