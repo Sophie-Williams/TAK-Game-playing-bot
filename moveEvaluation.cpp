@@ -113,6 +113,21 @@ double emptyPlace(state &old , state &new1, int playNum)
 			return 2 ;
 		}
 	}
+	else 
+	{
+		if(new1.printM[0]=='F'||new1.printM[0]=='C')
+		{	if(playNum==1)
+			return 10 ;
+			if(playNum==2)
+			return -10 ;
+		}
+		else
+		{	if(playNum==1)
+			return 2 ;
+			if(playNum==2)
+			return -2 ;
+		}
+	}
 	}
 	else
 	return 0 ;	
