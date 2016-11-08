@@ -3,10 +3,11 @@
 #include "variables.h"
 #include "class.h"
 #include "evaluation.h"
+#include "moveEvaluation.h"
 #include "nextstate.h"
 using namespace std;
 
-int ply=5;
+int ply=3;
 int boardSize=5; 
 bool ourCapRem =true;
 bool oppoCapRem=true;  
@@ -351,7 +352,7 @@ void printMove(state &curr)
 }
 
 int main()
-{  
+{  init() ;
    time_t seconds;
    time(&seconds);
    srand((unsigned int) seconds);
@@ -414,23 +415,38 @@ int main()
         myremTime=myremTime-(double)(end-start)/CLOCKS_PER_SEC;
         cerr<<myremTime<<endl;
         movNumber=movNumber+1; 
-      
-      /*string s1; 
-      string s2; 
-      cin>>s1;
-      cin>>s2;
-      changeArray(present,1,s1) ;
-      changeArray(present,2,s2) ;
-      cout<<"RoadWin"<<checkRoadWin(present,1)<<" opp"<<checkRoadWin(present,2)<<endl; 
-      //present=alphabetaPruning(present);
-      vector <state> ns = nextstate2(present) ;
-      /*for(int i=0;i<ns.size();i++)
-      {
-        cout<<ns[i].printM<<endl; 
-      }*/
+        
+      // cout<<"yo bitches"<<endl; 
+      // string s1; 
+      // string s2; 
+      // cin>>s1;
+      // cin>>s2;
+      // changeArray(present,1,s1) ;
+      // changeArray(present,2,s2) ;
+      // //cout<<"RoadWin"<<checkRoadWin(present,1)<<" opp"<<checkRoadWin(present,2)<<endl; 
+      // //present=alphabetaPruning(present);
+      // for(int i=0;i<boardSize;i++)
+      // {
+      //   for(int j=0;j<boardSize;j++)
+      //   {
+      //     if(present.boardState[i][j].size()==0)
+      //       cout<<"0 ";
+      //     else
+      //       cout<<present.boardState[i][j][present.boardState[i][j].size()-1]<<" "; 
+      //   } 
+      //   cout<<endl;
+      // }
+      //  vector <state> ns = nextstate(present) ;
+      // cout<<endl<<endl<<endl; 
+      //  vector <state> ns1 = nextstate2(present) ;
+      // cout<<"neighbours size"<<neighboursnew(present,make_tuple(3,4),1).size()<<endl; 
+      // /*for(int i=0;i<ns.size();i++)
+      // {
+      //   cout<<ns[i].printM<<endl; 
+      // }*/
 
-      //printMove(present) ;
-      //cout<<endl; 
+      // //printMove(present) ;
+      // //cout<<endl; 
    } 
    
 	return 0;

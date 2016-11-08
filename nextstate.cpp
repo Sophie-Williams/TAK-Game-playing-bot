@@ -2,6 +2,7 @@
 #include "nextstate.h"
 #include "variables.h"
 #include "evaluation.h"
+#include "moveEvaluation.h"
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -478,7 +479,7 @@ vector<state> nextstate(state &curr)  //decide on the moves here
     {
       for(int j=0;j<boardSize;j++)
       { tuple<int,int> v123= make_tuple(i,j);
-        if(curr.boardState[i][j].size()==0)  //&&(!emptyneighbour(curr,make_tuple(i,j)))
+        if(curr.boardState[i][j].size()==0&&(neighboursnew(curr,make_tuple(i,j),1).size()>0 || neighboursnew(curr,make_tuple(i,j),2).size()>0))  //&&(!emptyneighbour(curr,make_tuple(i,j)))
         {  
              //for flatstone
            temp.boardState = curr.boardState ;
@@ -494,7 +495,7 @@ vector<state> nextstate(state &curr)  //decide on the moves here
            temp2.parent= &curr ;      
            if(ourStonesRem>0)
            {
-            if(ourStonesRem>1||!(neighboursnew(curr,make_tuple(i,j),1).size()==0)||!(neighboursnew(curr,make_tuple(i,j),2).size()==0))
+            if(ourStonesRem>1)
             {
             temp.boardState[i][j].push_back(t) ;    // flat stone
             temp.printM="F"+my_map2[j+1]+my_map3[boardSize-i]; 
@@ -684,18 +685,19 @@ vector<state> nextstate(state &curr)  //decide on the moves here
       }
     }
     //cout<<" "<<f<<" "; 
-  
+  //cout<<"called nestsatte"<<endl; 
     for(int i=0;i<nextS.size();i++)
     {
-      nextS[i].eval= evalFxn(nextS[i]); 
+      nextS[i].eval= evaluateMove(curr, nextS[i], 1); 
+      //cout<<"move "<<nextS[i].printM<<" "<<"evaluation: "<<nextS[i].eval<<endl ; 
     }
 
    sort(nextS.begin(), nextS.end());
 
-    // for(int i=0;i<nextS.size();i++)
-    // {
-    //   cerr<<nextS[i].eval<<endl;//= evalFxn(nextS[i]); 
-    // }
+    for(int i=0;i<nextS.size();i++)
+    {
+       //cout<<"move "<<nextS[i].printM<<" "<<"evaluation: "<<nextS[i].eval<<endl ; 
+    }
     // cerr<<"yes i have printed"<<endl;
   return nextS ;
 }
@@ -732,7 +734,7 @@ vector<state> nextstate2(state &curr) //decide on the moves here
     {
       for(int j=0;j<boardSize;j++)
       {
-        if(curr.boardState[i][j].size()==0)  //&&(!emptyneighbour(curr,make_tuple(i,j)))
+        if(curr.boardState[i][j].size()==0&&(neighboursnew(curr,make_tuple(i,j),1).size()>0 || neighboursnew(curr,make_tuple(i,j),2).size()>0))  //&&(!emptyneighbour(curr,make_tuple(i,j)))
         {  
              //for flatstone
            temp.boardState = curr.boardState ;
@@ -927,15 +929,16 @@ vector<state> nextstate2(state &curr) //decide on the moves here
   
     for(int i=0;i<nextS.size();i++)
     {
-      nextS[i].eval= evalFxn(nextS[i]); 
+      nextS[i].eval= evaluateMove(curr, nextS[i], 2); 
+      
     }
 
    sort(nextS.begin(), nextS.end(),greater1());
 
-    /*for(int i=0;i<nextS.size();i++)
+    for(int i=0;i<nextS.size();i++)
     {
-      cerr<<nextS[i].eval<<endl;//= evalFxn(nextS[i]); 
-    }*/
+       //cerr<<"move "<<nextS[i].printM<<" "<<"evaluation: "<<nextS[i].eval<<endl ; 
+    }
   //cerr<<"yes i have printed"<<endl;    
   return nextS ;
 }
