@@ -31,21 +31,25 @@ double oneremaining1;
 double oneremaining2;
 void writeWeights()
 {
-  ofstream myfile;
+  /*ofstream myfile;
   myfile.open ("weights.txt");
   for(int i=0;i<weights.size();i++)
   { myfile <<weights[i] <<" ";
    	cerr<<weights[i]<<" ";
    }
    cerr<<weights.size()<<endl; 
-  myfile.close();
+  myfile.close();*/
 
 }
-void initialWeights()
+void initialWeights(int player)
 {	
-	//weights.resize(10); 
-
+	////weights.resize(10); 
+	//std::ifstream ifile;
 	std::ifstream ifile("weights.txt", std::ios::in);
+	if(player==2)
+	std::ifstream ifile("weights2.txt", std::ios::in);
+	//else
+	//ifile	std::ifstream ifile2("weights1.txt", std::ios::in);
     std::vector<double> scores;
 
     //check to see that the file was opened correctly:

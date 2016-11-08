@@ -1,5 +1,5 @@
 void influence(state &s);
-void initialWeights();
+void initialWeights(int player);
 void facefeat(state &s, int num);
 vector<tuple<int,int> > neighbours(state &s, tuple<int,int> t, int who);
 vector<tuple<int,int> > notNeighbours(state &s, tuple<int,int> t, int who);

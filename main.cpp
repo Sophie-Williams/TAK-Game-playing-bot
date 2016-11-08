@@ -92,14 +92,26 @@ state changeArray(state &temp,int playerNum,string s)
                column-=1;
                for(int i=0;i<t;i++)
                {
-                  temp.boardState[row-1][column-1].push_back(v.back());
-                  v.pop_back();  
+                  if(temp.boardState[row-1][column-1].size()!=0)
+                  {
+                    int n = temp.boardState[row-1][column-1][temp.boardState[row-1][column-1].size()-1];
+                    if((n==4 and v.back()==5) || (n==3 and v.back()==6))
+                      temp.boardState[row-1][column-1][temp.boardState[row-1][column-1].size()-1]=n-2;
+                  }
+                    temp.boardState[row-1][column-1].push_back(v.back());
+                    v.pop_back();  
                }
             break;
             case '>':
                column+=1;
                for(int i=0;i<t;i++)
                {
+                  if(temp.boardState[row-1][column-1].size()!=0)
+                  {
+                    int n = temp.boardState[row-1][column-1][temp.boardState[row-1][column-1].size()-1];
+                    if((n==4 and v.back()==5) || (n==3 and v.back()==6))
+                      temp.boardState[row-1][column-1][temp.boardState[row-1][column-1].size()-1]=n-2;
+                  }
                   temp.boardState[row-1][column-1].push_back(v.back());
                   v.pop_back();  
                }
@@ -108,6 +120,12 @@ state changeArray(state &temp,int playerNum,string s)
                row+=1;
                for(int i=0;i<t;i++)
                {
+                  if(temp.boardState[row-1][column-1].size()!=0)
+                  {
+                    int n = temp.boardState[row-1][column-1][temp.boardState[row-1][column-1].size()-1];
+                    if((n==4 and v.back()==5) || (n==3 and v.back()==6))
+                      temp.boardState[row-1][column-1][temp.boardState[row-1][column-1].size()-1]=n-2;
+                  }
                   temp.boardState[row-1][column-1].push_back(v.back());
                   v.pop_back();  
                }
@@ -116,6 +134,12 @@ state changeArray(state &temp,int playerNum,string s)
                row-=1;
                for(int i=0;i<t;i++)
                {
+                  if(temp.boardState[row-1][column-1].size()!=0)
+                  {
+                    int n = temp.boardState[row-1][column-1][temp.boardState[row-1][column-1].size()-1];
+                    if((n==4 and v.back()==5) || (n==3 and v.back()==6))
+                      temp.boardState[row-1][column-1][temp.boardState[row-1][column-1].size()-1]=n-1;
+                  }
                   temp.boardState[row-1][column-1].push_back(v.back());
                   v.pop_back();  
                } 
@@ -126,6 +150,7 @@ state changeArray(state &temp,int playerNum,string s)
    }
    return temp ;
 }
+
 state firstMove(state &initial,int num)
 {   
     int boardSize=initial.boardState.size();
@@ -330,9 +355,10 @@ int main()
    time_t seconds;
    time(&seconds);
    srand((unsigned int) seconds);
-   initialWeights();
+ 
    string ab=""; //1 5 100
    getline(cin,ab);
+   initialWeights(ab[0]-48);
    playerNum=1;
    int opponentNum= 2;//(playerNum%2)+1;
    boardSize=ab[2]-48;
