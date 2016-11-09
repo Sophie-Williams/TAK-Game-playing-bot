@@ -6,21 +6,24 @@
 
 #include<bits/stdc++.h>
 using namespace std;
-
+ 
 map<int, string> my_map2 = {{ 1,"a" },{2, "b"},{ 3,"c"},{ 4,"d"},{5, "e"},{6, "f"},{7, "g"}};
 map<int,string> my_map3 = {{ 1,"1" },{2, "2"},{ 3,"3"},{ 4,"4"},{5, "5"},{6, "6"},{7, "7"},{8, "8"},{9, "9"},{10, "10"}};
 
-void NsplitArrTop(state curr,int coverage , vector<int> rec, int present , vector<int> posi , state pre, vector<state> &temp, int cover, int row, int col)
+void NsplitArrTop(state curr,int coverage , vector<int> rec, int present , vector<int> posi , state pre, int playNum, int cover, int row, int col)
 {
   if(cover==coverage)
-  { temp.push_back(pre); 
+  { if(playNum==1)
+    myMoveVec.push_back(pre);
+    else
+    oppoMoveVec.push_back(pre); 
     return ; 
   }
   if(present==posi.size())
   {
     return  ;
   } 
-  NsplitArrTop(curr,coverage,rec,present+1, posi,pre,temp,cover,row,col) ;
+  NsplitArrTop(curr,coverage,rec,present+1, posi,pre,playNum,cover,row,col) ;
 
   int oldS= pre.boardState[row-cover][col].size() ; 
   for(int z= posi[present]+1 ;z<=posi[posi.size()-1] ;z++)
@@ -62,21 +65,24 @@ void NsplitArrTop(state curr,int coverage , vector<int> rec, int present , vecto
     pre.printM=pre.printM+ my_map3[te] ;  
   }
     
-    NsplitArrTop(curr,coverage,rec,present+1, posi,pre,temp,cover+1,row,col) ;
+    NsplitArrTop(curr,coverage,rec,present+1, posi,pre,playNum,cover+1,row,col) ;
   
 }
-void NsplitArrDown(state curr, int coverage , vector<int> rec, int present , vector<int> posi , state pre, vector<state> &temp, int cover, int row, int col)
+void NsplitArrDown(state curr, int coverage , vector<int> rec, int present , vector<int> posi , state pre, int playNum, int cover, int row, int col)
 {
   if(cover==coverage)
   { 
-    temp.push_back(pre); 
+    if(playNum==1)
+    myMoveVec.push_back(pre);
+    else
+    oppoMoveVec.push_back(pre); 
     return ; 
   }
   if(present==posi.size())
   {
     return  ;
   } 
-  NsplitArrDown(curr,coverage,rec,present+1, posi,pre,temp,cover,row,col) ;
+  NsplitArrDown(curr,coverage,rec,present+1, posi,pre,playNum,cover,row,col) ;
 
   int oldS= pre.boardState[row+cover][col].size() ; 
   for(int z= posi[present]+1 ;z<=posi[posi.size()-1] ;z++)
@@ -115,19 +121,22 @@ void NsplitArrDown(state curr, int coverage , vector<int> rec, int present , vec
       return ;
     pre.printM=pre.printM+ my_map3[te] ;  
   }
-    NsplitArrDown(curr,coverage,rec,present+1, posi,pre,temp,cover+1,row,col) ;
+    NsplitArrDown(curr,coverage,rec,present+1, posi,pre,playNum,cover+1,row,col) ;
 }
-void NsplitArrRight(state curr,int coverage , vector<int> rec, int present , vector<int> posi , state pre, vector<state> &temp, int cover, int row, int col)
+void NsplitArrRight(state curr,int coverage , vector<int> rec, int present , vector<int> posi , state pre, int playNum, int cover, int row, int col)
 {
   if(cover==coverage)
-  { temp.push_back(pre); 
+  { if(playNum==1)
+    myMoveVec.push_back(pre);
+    else
+    oppoMoveVec.push_back(pre); 
     return ; 
   }
   if(present==posi.size())
   {
     return  ;
   } 
-  NsplitArrRight(curr,coverage,rec,present+1, posi,pre,temp,cover,row,col) ;
+  NsplitArrRight(curr,coverage,rec,present+1, posi,pre,playNum,cover,row,col) ;
 
   int oldS= pre.boardState[row][col+cover].size() ; 
   for(int z= posi[present]+1 ;z<=posi[posi.size()-1] ;z++)
@@ -169,19 +178,22 @@ void NsplitArrRight(state curr,int coverage , vector<int> rec, int present , vec
     pre.printM=pre.printM+ my_map3[te] ;  
   }
 
-    NsplitArrRight(curr,coverage,rec,present+1, posi,pre,temp,cover+1,row,col) ;
+    NsplitArrRight(curr,coverage,rec,present+1, posi,pre,playNum,cover+1,row,col) ;
 }
-void NsplitArrLeft(state curr,int coverage , vector<int> rec, int present , vector<int> posi , state pre, vector<state> &temp, int cover, int row, int col)
+void NsplitArrLeft(state curr,int coverage , vector<int> rec, int present , vector<int> posi , state pre, int playNum, int cover, int row, int col)
 { //cout<<" "<<coverage<<" "<<present<<" "<<cover<<endl ;
   if(cover==coverage)
-  { temp.push_back(pre); 
+  { if(playNum==1)
+    myMoveVec.push_back(pre);
+    else
+    oppoMoveVec.push_back(pre); 
     return ; 
   }
   if(present==posi.size())
   {
     return  ;
   } 
-  NsplitArrLeft(curr,coverage,rec,present+1, posi,pre,temp,cover,row,col) ;
+  NsplitArrLeft(curr,coverage,rec,present+1, posi,pre,playNum,cover,row,col) ;
 
   int oldS= pre.boardState[row][col-cover].size() ; 
   for(int z= posi[present]+1 ;z<=posi[posi.size()-1] ;z++)
@@ -222,19 +234,22 @@ void NsplitArrLeft(state curr,int coverage , vector<int> rec, int present , vect
       return ;
     pre.printM=pre.printM+ my_map3[te] ;  
   }
-    NsplitArrLeft(curr,coverage,rec,present+1, posi,pre,temp,cover+1,row,col) ;
+    NsplitArrLeft(curr,coverage,rec,present+1, posi,pre,playNum,cover+1,row,col) ;
 }
-void CsplitArrTop(state curr, int coverage , vector<int> rec, int present , vector<int> posi , state pre, vector<state> &temp, int cover, int row, int col)
+void CsplitArrTop(state curr, int coverage , vector<int> rec, int present , vector<int> posi , state pre, int playNum, int cover, int row, int col)
 {
   if(cover==coverage)
-  { temp.push_back(pre); 
+  { if(playNum==1)
+    myMoveVec.push_back(pre);
+    else
+    oppoMoveVec.push_back(pre); 
     return ; 
   }
   if(present==posi.size())
   {
     return  ;
   } 
-  CsplitArrTop(curr,coverage,rec,present+1, posi,pre,temp,cover,row,col) ;
+  CsplitArrTop(curr,coverage,rec,present+1, posi,pre,playNum,cover,row,col) ;
 
   int oldS= pre.boardState[row-cover][col].size() ;
   for(int z= posi[present]+1 ;z<=posi[posi.size()-1] ;z++)
@@ -281,20 +296,23 @@ void CsplitArrTop(state curr, int coverage , vector<int> rec, int present , vect
       return ;
     pre.printM=pre.printM+ my_map3[te] ;  
   }
-    CsplitArrTop(curr,coverage,rec,present+1, posi,pre,temp,cover+1,row,col) ;
+    CsplitArrTop(curr,coverage,rec,present+1, posi,pre,playNum,cover+1,row,col) ;
   
 }
-void CsplitArrDown(state curr,int coverage , vector<int> rec, int present , vector<int> posi , state pre, vector<state> &temp, int cover, int row, int col)
+void CsplitArrDown(state curr,int coverage , vector<int> rec, int present , vector<int> posi , state pre, int playNum, int cover, int row, int col)
 { //cout<<"started" ;
   if(cover==coverage)
-  { temp.push_back(pre); 
+  { if(playNum==1)
+    myMoveVec.push_back(pre);
+    else
+    oppoMoveVec.push_back(pre); 
     return ; 
   }
   if(present==posi.size())
   {
     return  ;
   } 
-  CsplitArrDown(curr,coverage,rec,present+1, posi,pre,temp,cover,row,col) ;
+  CsplitArrDown(curr,coverage,rec,present+1, posi,pre,playNum,cover,row,col) ;
 
   int oldS= pre.boardState[row+cover][col].size() ; 
   for(int z= posi[present]+1 ;z<=posi[posi.size()-1] ;z++)
@@ -340,19 +358,22 @@ void CsplitArrDown(state curr,int coverage , vector<int> rec, int present , vect
     pre.printM=pre.printM+ my_map3[te] ;  
   }
   
-    CsplitArrDown(curr,coverage,rec,present+1, posi,pre,temp,cover+1,row,col) ;
+    CsplitArrDown(curr,coverage,rec,present+1, posi,pre,playNum,cover+1,row,col) ;
 }
-void CsplitArrRight(state curr,int coverage , vector<int> rec, int present , vector<int> posi , state pre, vector<state> &temp, int cover, int row, int col)
+void CsplitArrRight(state curr,int coverage , vector<int> rec, int present , vector<int> posi , state pre, int playNum, int cover, int row, int col)
 {
   if(cover==coverage)
-  { temp.push_back(pre); 
+  { if(playNum==1)
+    myMoveVec.push_back(pre);
+    else
+    oppoMoveVec.push_back(pre); 
     return ; 
   }
   if(present==posi.size())
   {
     return  ;
   } 
-  CsplitArrRight(curr,coverage,rec,present+1, posi,pre,temp,cover,row,col) ;
+  CsplitArrRight(curr,coverage,rec,present+1, posi,pre,playNum,cover,row,col) ;
 
   int oldS= pre.boardState[row][col+cover].size() ; 
   for(int z= posi[present]+1 ;z<=posi[posi.size()-1] ;z++)
@@ -396,19 +417,22 @@ void CsplitArrRight(state curr,int coverage , vector<int> rec, int present , vec
       return ;
     pre.printM=pre.printM+ my_map3[te] ;  
   }
-    CsplitArrRight(curr,coverage,rec,present+1, posi,pre,temp,cover+1,row,col) ;
+    CsplitArrRight(curr,coverage,rec,present+1, posi,pre,playNum,cover+1,row,col) ;
 }
-void CsplitArrLeft(state curr,int coverage , vector<int> rec, int present , vector<int> posi , state pre, vector<state> &temp, int cover, int row, int col)
+void CsplitArrLeft(state curr,int coverage , vector<int> rec, int present , vector<int> posi , state pre, int playNum, int cover, int row, int col)
 {
   if(cover==coverage)
-  { temp.push_back(pre); 
+  { if(playNum==1)
+    myMoveVec.push_back(pre);
+    else
+    oppoMoveVec.push_back(pre); 
     return ; 
   }
   if(present==posi.size())
   {
     return  ;
   } 
-  CsplitArrLeft(curr,coverage,rec,present+1, posi,pre,temp,cover,row,col) ;
+  CsplitArrLeft(curr,coverage,rec,present+1, posi,pre,playNum,cover,row,col) ;
 
   int oldS= pre.boardState[row][col-cover].size() ; 
   for(int z= posi[present]+1 ;z<=posi[posi.size()-1] ;z++)
@@ -452,14 +476,15 @@ void CsplitArrLeft(state curr,int coverage , vector<int> rec, int present , vect
       return ;
     pre.printM=pre.printM+ my_map3[te] ;  
   }
-    CsplitArrLeft(curr,coverage,rec,present+1, posi,pre,temp,cover+1,row,col) ;
+    CsplitArrLeft(curr,coverage,rec,present+1, posi,pre,playNum,cover+1,row,col) ;
 }
 
-vector<state> nextstate(state &curr)  //decide on the moves here
+void nextstate(state &curr)  //decide on the moves here
 { int t= 0 ;
   int p= 0 ;  
-  int q =0 ;   
-  vector<state> nextS ;
+  int q =0 ; 
+  myMoveVec.clear() ;  
+  
     
       t=1;
       p=3;  
@@ -501,8 +526,8 @@ vector<state> nextstate(state &curr)  //decide on the moves here
             temp.printM="F"+my_map2[j+1]+my_map3[boardSize-i]; 
             temp1.boardState[i][j].push_back(p) ;
             temp1.printM="S"+my_map2[j+1]+my_map3[boardSize-i];
-            nextS.push_back(temp) ;
-            nextS.push_back(temp1); 
+            myMoveVec.push_back(temp) ;
+            myMoveVec.push_back(temp1); 
             }
             else 
             {
@@ -510,7 +535,7 @@ vector<state> nextstate(state &curr)  //decide on the moves here
               temp.printM="F"+my_map2[j+1]+my_map3[boardSize-i];
               if(checkRoadWin(temp,1))
               {
-                nextS.push_back(temp);
+                myMoveVec.push_back(temp);
               } 
             }
 
@@ -519,7 +544,7 @@ vector<state> nextstate(state &curr)  //decide on the moves here
            {
             temp2.printM="C"+my_map2[j+1]+my_map3[boardSize-i];
             temp2.boardState[i][j].push_back(q) ;
-            nextS.push_back(temp2) ;
+            myMoveVec.push_back(temp2) ;
            }        
            //cout<<" "<<nextS.size()<<" ";
         }
@@ -562,13 +587,13 @@ vector<state> nextstate(state &curr)  //decide on the moves here
                 St.boardState=curr.boardState; 
                 St.parent=&curr ;
                 St.depth=curr.depth+1; 
-                /*if(true||St.boardState[i-1][j].size()==0)
+                if(St.boardState[i][j].size()==1&&St.boardState[i-1][j].size()==0&&prune)
                 {
 
                 }
-                else*/
+                else
                 {
-                  NsplitArrTop(curr,h+1,curr.boardState[i][j],y123,pos,St,nextS,0,i,j); 
+                  NsplitArrTop(curr,h+1,curr.boardState[i][j],y123,pos,St,1,0,i,j); 
                 }
               }
 
@@ -577,13 +602,13 @@ vector<state> nextstate(state &curr)  //decide on the moves here
                 St.boardState=curr.boardState; 
                 St.parent=&curr ;
                 St.depth=curr.depth+1; 
-                /*if(true||St.boardState[i+1][j].size()==0)
+                if(prune&&St.boardState[i+1][j].size()==0&&St.boardState[i][j].size()==1)
                 {
 
                 }
-                else*/
+                else
                 {
-                NsplitArrDown(curr,h+1,curr.boardState[i][j],y123,pos,St,nextS,0,i,j); 
+                NsplitArrDown(curr,h+1,curr.boardState[i][j],y123,pos,St,1,0,i,j); 
                 }
               } 
               for(int h=0;h<min(right,tr);h++)
@@ -591,12 +616,12 @@ vector<state> nextstate(state &curr)  //decide on the moves here
                 St.boardState=curr.boardState; 
                 St.parent=&curr ;
                 St.depth=curr.depth+1; 
-                /*if(St.boardState[i][j+1].size()==0)
+                if(St.boardState[i][j+1].size()==0&&prune&&St.boardState[i][j].size()==1)
                 {
 
                 }
-                else*/
-                {NsplitArrRight(curr,h+1,curr.boardState[i][j],y123,pos,St,nextS,0,i,j); 
+                else
+                {NsplitArrRight(curr,h+1,curr.boardState[i][j],y123,pos,St,1,0,i,j); 
                 }
               }
               for(int h=0;h<min(left,tr);h++)
@@ -605,17 +630,30 @@ vector<state> nextstate(state &curr)  //decide on the moves here
                 St.parent=&curr ;
                 St.depth=curr.depth+1; 
                 //cout<<"yo"<<endl;
-                /*if(St.boardState[i][j-1].size()==0||true)
+                if(St.boardState[i][j-1].size()==0&&prune&&St.boardState[i][j].size()==1)
                 {
 
                 }
-                else*/
-                {NsplitArrLeft(curr,h+1,curr.boardState[i][j],y123,pos,St,nextS,0,i,j); 
+                else
+                {NsplitArrLeft(curr,h+1,curr.boardState[i][j],y123,pos,St,1,0,i,j); 
                 }
               }
             }
           if(curr.boardState[i][j][curr.boardState[i][j].size()-1]==q)
             {
+              vector<int> pos ;
+              pos.push_back(-1) ;
+              for(int z=0; z<curr.boardState[i][j].size();z++)
+                {
+                  if(true)
+                  {
+                    pos.push_back(z); 
+                  }   
+                }
+                if(pos.size()==1)
+                {
+                  pos.pop_back();  
+                }
              tr= pos.size()-1 ;
               int y123; 
               for(y123=0;y123<=tr;y123++)
@@ -628,13 +666,13 @@ vector<state> nextstate(state &curr)  //decide on the moves here
                 St.boardState=curr.boardState; 
                 St.parent=&curr ;
                 St.depth=curr.depth+1; 
-                /*if(true||St.boardState[i-1][j].size()==0)
+                if(St.boardState[i-1][j].size()==0&&prune&&St.boardState[i][j].size()==1)
                 {
 
                 }
-                else*/
+                else
                 {
-                  CsplitArrTop(curr,h+1,curr.boardState[i][j],y123,pos,St,nextS,0,i,j); 
+                  CsplitArrTop(curr,h+1,curr.boardState[i][j],y123,pos,St,1,0,i,j); 
                 }
               }
 
@@ -643,13 +681,13 @@ vector<state> nextstate(state &curr)  //decide on the moves here
                 St.boardState=curr.boardState; 
                 St.parent=&curr ;
                 St.depth=curr.depth+1; 
-                /*if(true||St.boardState[i+1][j].size()==0)
+                if(St.boardState[i][j].size()==1&&prune&&St.boardState[i+1][j].size()==0)
                 {
 
                 }
-                else*/
+                else
                 {
-                CsplitArrDown(curr,h+1,curr.boardState[i][j],y123,pos,St,nextS,0,i,j); 
+                CsplitArrDown(curr,h+1,curr.boardState[i][j],y123,pos,St,1,0,i,j); 
                 }
               } 
               for(int h=0;h<min(right,tr);h++)
@@ -657,12 +695,12 @@ vector<state> nextstate(state &curr)  //decide on the moves here
                 St.boardState=curr.boardState; 
                 St.parent=&curr ;
                 St.depth=curr.depth+1; 
-                /*if(St.boardState[i][j+1].size()==0)
+                if(St.boardState[i][j+1].size()==0&&St.boardState[i][j].size()==1&&prune)
                 {
 
                 }
-                else*/
-                {CsplitArrRight(curr,h+1,curr.boardState[i][j],y123,pos,St,nextS,0,i,j); 
+                else
+                {CsplitArrRight(curr,h+1,curr.boardState[i][j],y123,pos,St,1,0,i,j); 
                 }
               }
               for(int h=0;h<min(left,tr);h++)
@@ -671,12 +709,12 @@ vector<state> nextstate(state &curr)  //decide on the moves here
                 St.parent=&curr ;
                 St.depth=curr.depth+1; 
                 //cout<<"yo"<<endl;
-                /*if(St.boardState[i][j-1].size()==0||true)
+                if(St.boardState[i][j-1].size()==0&&prune&&St.boardState[i][j].size()==1)
                 {
 
                 }
-                else*/
-                {CsplitArrLeft(curr,h+1,curr.boardState[i][j],y123,pos,St,nextS,0,i,j); 
+                else
+                {CsplitArrLeft(curr,h+1,curr.boardState[i][j],y123,pos,St,1,0,i,j); 
                 }
               }  
             }   
@@ -684,33 +722,36 @@ vector<state> nextstate(state &curr)  //decide on the moves here
         }
       }
     }
+    
+    
     //cout<<" "<<f<<" "; 
   //cout<<"called nestsatte"<<endl; 
-    for(int i=0;i<nextS.size();i++)
+    for(int i=0;i<myMoveVec.size();i++)
     {
-      nextS[i].eval= evaluateMove(curr, nextS[i], 1); 
+      myMoveVec[i].eval= evaluateMove(curr, myMoveVec[i], 1); 
       //cout<<"move "<<nextS[i].printM<<" "<<"evaluation: "<<nextS[i].eval<<endl ; 
     }
 
-   sort(nextS.begin(), nextS.end());
+   sort(myMoveVec.begin(), myMoveVec.end());
 
-    for(int i=0;i<nextS.size();i++)
-    {
-       //cout<<"move "<<nextS[i].printM<<" "<<"evaluation: "<<nextS[i].eval<<endl ; 
-    }
+    // for(int i=0;i<nextS.size();i++)
+    // {
+    //    //cout<<"move "<<nextS[i].printM<<" "<<"evaluation: "<<nextS[i].eval<<endl ; 
+    // }
     // cerr<<"yes i have printed"<<endl;
-  return nextS ;
+  //return myMoveVec ;
 }
 struct greater1
 {
     template<class T>
     bool operator()(T const &a, T const &b) const { return a.eval < b.eval; }
 };
-vector<state> nextstate2(state &curr) //decide on the moves here
+void nextstate2(state &curr) //decide on the moves here
 { int t= 0 ;
   int p= 0 ;  
-  int q =0 ;   
-  vector<state> nextS ;
+  int q =0 ;
+  oppoMoveVec.clear();    
+  
     /*if(playerNum==1)               //returns the vector of next possible states .  
     {
       t=2 ;
@@ -754,14 +795,14 @@ vector<state> nextstate2(state &curr) //decide on the moves here
           temp.printM="F"+my_map2[j+1]+my_map3[boardSize-i]; 
           temp1.boardState[i][j].push_back(p) ;
           temp1.printM="S"+my_map2[j+1]+my_map3[boardSize-i];
-          nextS.push_back(temp) ;
-          nextS.push_back(temp1); 
+          oppoMoveVec.push_back(temp) ;
+          oppoMoveVec.push_back(temp1); 
            }        
            if(oppoCapRem)
            {
             temp2.printM="C"+my_map2[j+1]+my_map3[boardSize-i];
             temp2.boardState[i][j].push_back(q) ;
-            nextS.push_back(temp2) ;
+            oppoMoveVec.push_back(temp2) ;
            }        
            //cout<<" "<<nextS.size()<<" ";
         }
@@ -808,7 +849,7 @@ vector<state> nextstate2(state &curr) //decide on the moves here
 
                 }
                 else*/ 
-                  {NsplitArrTop(curr,h+1,curr.boardState[i][j],y123,pos,St,nextS,0,i,j); 
+                  {NsplitArrTop(curr,h+1,curr.boardState[i][j],y123,pos,St,2,0,i,j); 
                     }
               }
 
@@ -822,7 +863,7 @@ vector<state> nextstate2(state &curr) //decide on the moves here
 
                 } 
                 else*/ {
-                  NsplitArrDown(curr,h+1,curr.boardState[i][j],y123,pos,St,nextS,0,i,j); 
+                  NsplitArrDown(curr,h+1,curr.boardState[i][j],y123,pos,St,2,0,i,j); 
                 }
               } 
               for(int h=0;h<min(right,tr);h++)
@@ -835,7 +876,7 @@ vector<state> nextstate2(state &curr) //decide on the moves here
 
                 }
                 else*/
-                {NsplitArrRight(curr,h+1,curr.boardState[i][j],y123,pos,St,nextS,0,i,j); 
+                {NsplitArrRight(curr,h+1,curr.boardState[i][j],y123,pos,St,2,0,i,j); 
                 }
               }
               for(int h=0;h<min(left,tr);h++)
@@ -849,7 +890,7 @@ vector<state> nextstate2(state &curr) //decide on the moves here
 
                 }
                 else*/
-                {NsplitArrLeft(curr,h+1,curr.boardState[i][j],y123,pos,St,nextS,0,i,j); 
+                {NsplitArrLeft(curr,h+1,curr.boardState[i][j],y123,pos,St,2,0,i,j); 
                 }
               }
             }
@@ -876,7 +917,7 @@ vector<state> nextstate2(state &curr) //decide on the moves here
 
                 }
                 else*/ 
-                  {CsplitArrTop(curr,h+1,curr.boardState[i][j],y123,pos,St,nextS,0,i,j); 
+                  {CsplitArrTop(curr,h+1,curr.boardState[i][j],y123,pos,St,2,0,i,j); 
                     }
               }
 
@@ -890,7 +931,7 @@ vector<state> nextstate2(state &curr) //decide on the moves here
 
                 } 
                 else */{
-                  CsplitArrDown(curr,h+1,curr.boardState[i][j],y123,pos,St,nextS,0,i,j); 
+                  CsplitArrDown(curr,h+1,curr.boardState[i][j],y123,pos,St,2,0,i,j); 
                 }
               } 
               for(int h=0;h<min(right,tr);h++)
@@ -903,7 +944,7 @@ vector<state> nextstate2(state &curr) //decide on the moves here
 
                 }
                 else*/
-                {CsplitArrRight(curr,h+1,curr.boardState[i][j],y123,pos,St,nextS,0,i,j); 
+                {CsplitArrRight(curr,h+1,curr.boardState[i][j],y123,pos,St,2,0,i,j); 
                 }
               }
               for(int h=0;h<min(left,tr);h++)
@@ -917,7 +958,7 @@ vector<state> nextstate2(state &curr) //decide on the moves here
 
                 }
                 else*/
-                {CsplitArrLeft(curr,h+1,curr.boardState[i][j],y123,pos,St,nextS,0,i,j); 
+                {CsplitArrLeft(curr,h+1,curr.boardState[i][j],y123,pos,St,2,0,i,j); 
                 }
               } 
             }   
@@ -926,24 +967,39 @@ vector<state> nextstate2(state &curr) //decide on the moves here
       }
     }
     //cout<<" "<<f<<" "; 
-  
-    for(int i=0;i<nextS.size();i++)
+    
+    //nextS=oppoMoveVec ;
+    for(int i=0;i<oppoMoveVec.size();i++)
     {
-      nextS[i].eval= evaluateMove(curr, nextS[i], 2); 
+      oppoMoveVec[i].eval= evaluateMove(curr, oppoMoveVec[i], 2); 
       
     }
 
-   sort(nextS.begin(), nextS.end(),greater1());
+   sort(oppoMoveVec.begin(), oppoMoveVec.end(),greater1());
 
-    for(int i=0;i<nextS.size();i++)
-    {
-       //cerr<<"move "<<nextS[i].printM<<" "<<"evaluation: "<<nextS[i].eval<<endl ; 
-    }
+    // for(int i=0;i<nextS.size();i++)
+    // {
+    //    //cerr<<"move "<<nextS[i].printM<<" "<<"evaluation: "<<nextS[i].eval<<endl ; 
+    // }
   //cerr<<"yes i have printed"<<endl;    
-  return nextS ;
+  
 }
 
-
+state GoingtoLoose( state s)
+{
+  for(int i=0;i<boardSize;i++)
+  {
+    for(int j=0;j<boardSize;j++)
+    {
+      if(s.boardState[i][j].size()==0)
+      {
+        s.boardState[i][j].push_back(1) ;
+        s.printM= "F"+my_map2[j+1]+my_map3[boardSize-i];
+      }
+    }
+  }
+  return s ;
+}
 /*vector<state> nextstate(state &curr)
 {
   
