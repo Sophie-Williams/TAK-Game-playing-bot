@@ -88,6 +88,7 @@ state changeArray(state &temp,int playerNum,string s)
          v.push_back(j);
          temp.boardState[row-1][column-1].pop_back();
       }
+      vector<int> vnew;
       while (temp1<numStones){
          int t=s.at(i)-48;
          temp1+=t;
@@ -95,13 +96,14 @@ state changeArray(state &temp,int playerNum,string s)
          {
             case '<':
                column-=1;
+               vnew = temp.boardState[row-1][column-1];
                for(int i=0;i<t;i++)
                {
-                  if(temp.boardState[row-1][column-1].size()!=0)
+                  if(vnew.size()!=0)
                   {
-                    int n = temp.boardState[row-1][column-1][temp.boardState[row-1][column-1].size()-1];
+                    int n = vnew[vnew.size()-1];
                     if((n==4 and v.back()==5) || (n==3 and v.back()==6))
-                      temp.boardState[row-1][column-1][temp.boardState[row-1][column-1].size()-1]=n-2;
+                      temp.boardState[row-1][column-1][vnew.size()-1]=n-2;
                   }
                     temp.boardState[row-1][column-1].push_back(v.back());
                     v.pop_back();  
@@ -109,13 +111,14 @@ state changeArray(state &temp,int playerNum,string s)
             break;
             case '>':
                column+=1;
+               vnew = temp.boardState[row-1][column-1];
                for(int i=0;i<t;i++)
                {
-                  if(temp.boardState[row-1][column-1].size()!=0)
+                  if(vnew.size()!=0)
                   {
-                    int n = temp.boardState[row-1][column-1][temp.boardState[row-1][column-1].size()-1];
+                    int n = vnew[vnew.size()-1];
                     if((n==4 and v.back()==5) || (n==3 and v.back()==6))
-                      temp.boardState[row-1][column-1][temp.boardState[row-1][column-1].size()-1]=n-2;
+                      temp.boardState[row-1][column-1][vnew.size()-1]=n-2;
                   }
                   temp.boardState[row-1][column-1].push_back(v.back());
                   v.pop_back();  
@@ -123,13 +126,14 @@ state changeArray(state &temp,int playerNum,string s)
             break;
             case '-':
                row+=1;
+               vnew = temp.boardState[row-1][column-1];
                for(int i=0;i<t;i++)
                {
-                  if(temp.boardState[row-1][column-1].size()!=0)
+                  if(vnew.size()!=0)
                   {
-                    int n = temp.boardState[row-1][column-1][temp.boardState[row-1][column-1].size()-1];
+                    int n = vnew[vnew.size()-1];
                     if((n==4 and v.back()==5) || (n==3 and v.back()==6))
-                      temp.boardState[row-1][column-1][temp.boardState[row-1][column-1].size()-1]=n-2;
+                      temp.boardState[row-1][column-1][vnew.size()-1]=n-2;
                   }
                   temp.boardState[row-1][column-1].push_back(v.back());
                   v.pop_back();  
@@ -137,13 +141,14 @@ state changeArray(state &temp,int playerNum,string s)
             break;
             case '+':
                row-=1;
+               vnew = temp.boardState[row-1][column-1];
                for(int i=0;i<t;i++)
                {
-                  if(temp.boardState[row-1][column-1].size()!=0)
+                  if(vnew.size()!=0)
                   {
-                    int n = temp.boardState[row-1][column-1][temp.boardState[row-1][column-1].size()-1];
+                    int n = vnew[vnew.size()-1];
                     if((n==4 and v.back()==5) || (n==3 and v.back()==6))
-                      temp.boardState[row-1][column-1][temp.boardState[row-1][column-1].size()-1]=n-1;
+                      temp.boardState[row-1][column-1][vnew.size()-1]=n-1;
                   }
                   temp.boardState[row-1][column-1].push_back(v.back());
                   v.pop_back();  
@@ -155,6 +160,7 @@ state changeArray(state &temp,int playerNum,string s)
    }
    return temp ;
 }
+
 
 state firstMove(state &initial,int num)
 {   
@@ -370,7 +376,8 @@ int main()
  
    string ab=""; //1 5 100
    getline(cin,ab);
-   initialWeights(ab[0]-48);
+   //initialWeights(ab[0]-48);
+   initialWeights(1);
    playerNum=1;
    int opponentNum= 2;//(playerNum%2)+1;
    boardSize=ab[2]-48;
@@ -420,6 +427,7 @@ int main()
         		ply= 4; 
         	}
             current= alphabetaPruning(current);
+            evalFxn(current);
             if(checkRoadWin(current,1))
             {
             	cerr<<"winning"<<endl;

@@ -681,8 +681,9 @@ bool checkRoadWin(state &s, int num)
 		{p=1;q=5;}
 	else
 		{p=2;q=6;}
-	int n= s.boardState.size();
+	int n= boardSize;
 	bool f = false;
+	
 	for(int i=0;i<n && f==false;i++)
 	{
 		for(int j=0;j<n;j++)
@@ -699,7 +700,7 @@ bool checkRoadWin(state &s, int num)
 						break;
 					}
 				}		
-			}else if(j==0 || j==(n-1))
+			}else if(j==0 || j==n-1)
 			{			
 				if( s.boardState[i][j].size()!=0)
 				{
@@ -716,79 +717,70 @@ bool checkRoadWin(state &s, int num)
 		if(i==n-1)
 			return false;
 	}
-
 	l6:;
 
+	int numStone;
 	for(int t1=0;t1<n;t1++)
 	{
-	int numStone;
-	if(s.boardState[t1][0].size()==0)
-		continue ;
-	numStone = s.boardState[t1][0][s.boardState[t1][0].size()-1];	
-	if(numStone!=p && numStone!=q)
-		continue;
-
-	stack< tuple<int,int> > mystack;
-	set< tuple<int,int> > myset;
-	
-	mystack.push(make_tuple(t1,0));
-	while(!mystack.empty())
-	{
-		tuple<int,int> current = mystack.top();
-		mystack.pop();
-		int initialSize=myset.size();
-		myset.insert(current);
-		if(myset.size()==initialSize)
+		if(s.boardState[t1][0].size()==0)
+			continue ;
+		numStone = s.boardState[t1][0][s.boardState[t1][0].size()-1];	
+		if(numStone!=p && numStone!=q)
 			continue;
-		else{
-			if(get<1>(current)==n-1)
-				return true;
-			{
+
+		stack< tuple<int,int> > mystack;
+		set< tuple<int,int> > myset;
+		
+		mystack.push(make_tuple(t1,0));
+		while(!mystack.empty())
+		{
+			tuple<int,int> current = mystack.top();
+			mystack.pop();
+			int initialSize=myset.size();
+			myset.insert(current);
+			if(myset.size()==initialSize)
+				continue;
+			else{
+				if(get<1>(current)==n-1)
+					return true;
+				
 				vector<tuple<int,int> > n=neighbours(s,current,num);
 				for(int j=0;j<n.size();j++)
-				{
-					//if(neighbours(s,current)[j]!=mystack.top())
-						mystack.push(n[j]);		
-				}
+					mystack.push(n[j]);		
+				
 			}
 		}
-	}
 		
 	}
 	
 	for(int t2=0;t2<n;t2++)
 	{
-	if(s.boardState[0][t2].size()==0)
-		continue ;
-	int numStone = s.boardState[0][t2][s.boardState[0][t2].size()-1];	
-	if(numStone!=p && numStone!=q)
-		continue;
-	stack< tuple<int,int> > mystack;
-	set< tuple<int,int> > myset;
-	
-	mystack.push(make_tuple(0,t2));
-	while(!mystack.empty())
-	{
-		tuple<int,int> current = mystack.top();
-		mystack.pop() ;
-		int initialSize=myset.size();
-		myset.insert(current);
-		if(myset.size()==initialSize)
+		if(s.boardState[0][t2].size()==0)
+			continue ;
+		numStone = s.boardState[0][t2][s.boardState[0][t2].size()-1];	
+		if(numStone!=p && numStone!=q)
 			continue;
-		else{
-			if(get<0>(current)==n-1)
-				return true;
-			{
+		stack< tuple<int,int> > mystack;
+		set< tuple<int,int> > myset;
+		
+		mystack.push(make_tuple(0,t2));
+		while(!mystack.empty())
+		{
+			tuple<int,int> current = mystack.top();
+			mystack.pop() ;
+			int initialSize=myset.size();
+			myset.insert(current);
+			if(myset.size()==initialSize)
+				continue;
+			else{
+				if(get<0>(current)==n-1)
+					return true;
+					
 				vector<tuple<int,int> > n=neighbours(s,current,num);
-			
 				for(int j=0;j<n.size();j++)
-				{
-					//if(neighbours(s,current)[j]!=mystack.top())
-						mystack.push(n[j]);		
-				}
+					mystack.push(n[j]);
 			}
 		}
-	}
 	
 	}
 
