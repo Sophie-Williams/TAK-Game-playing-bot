@@ -18,6 +18,10 @@ double myremTime;
 double totalTime; 
 int movNumber=0;
 int totState=0;  
+
+vector<state> myMoveVec;
+vector<state> oppoMoveVec;
+
 state nextMov(boardSize);
 bool isTerminal(state &s)
 {
@@ -265,6 +269,13 @@ double maxVal(state &curr, double alpha, double beta)
    		return evalFxn(curr);  //return state evaluation fxn
    }
    vector<state> next= nextstate(curr);
+   if(curr.depth==0)
+   {cerr<<"Depth:"<<curr.depth<<" numChildren:"<<next.size()<<endl;  
+    if(next.size()==1)
+     { nextMov= next[0]; 
+       return evalFxn(nextMov);
+      }
+   }
    double currEval =LONG_MIN;
    double temp ;
    for(int i=0;i<next.size();i++)
@@ -376,6 +387,7 @@ int main()
    myremTime=myremTime-(end-start)/CLOCKS_PER_SEC;
    cerr<<myremTime<<endl;
    movNumber=1;
+   myMoveVec.push_back(current); 
    //state present(boardSize);
    while(true)
    {	
@@ -386,7 +398,17 @@ int main()
            	start = clock();
             current = changeArray(current, opponentNum, opponentmove);
         }
-        
+        for(int i=0;i<boardSize;i++)
+        {
+          for(int j=0;j<boardSize;j++)
+          {
+            if(current.boardState[i][j].size()==0)
+              cerr<<"0 ";
+            else
+              cerr<<current.boardState[i][j][current.boardState[i][j].size()-1]<<" "; 
+          } 
+          cerr<<endl;
+        }
         try
         {
         	if(myremTime<0.9*totalTime && myremTime>0.1*totalTime)
@@ -425,25 +447,25 @@ int main()
       // changeArray(present,2,s2) ;
       // //cout<<"RoadWin"<<checkRoadWin(present,1)<<" opp"<<checkRoadWin(present,2)<<endl; 
       // //present=alphabetaPruning(present);
-      // for(int i=0;i<boardSize;i++)
-      // {
-      //   for(int j=0;j<boardSize;j++)
-      //   {
-      //     if(present.boardState[i][j].size()==0)
-      //       cout<<"0 ";
-      //     else
-      //       cout<<present.boardState[i][j][present.boardState[i][j].size()-1]<<" "; 
-      //   } 
-      //   cout<<endl;
-      // }
-      //  vector <state> ns = nextstate(present) ;
-      // cout<<endl<<endl<<endl; 
-      //  vector <state> ns1 = nextstate2(present) ;
-      // cout<<"neighbours size"<<neighboursnew(present,make_tuple(3,4),1).size()<<endl; 
-      // /*for(int i=0;i<ns.size();i++)
+      // // for(int i=0;i<boardSize;i++)
+      // // {
+      // //   for(int j=0;j<boardSize;j++)
+      // //   {
+      // //     if(present.boardState[i][j].size()==0)
+      // //       cout<<"0 ";
+      // //     else
+      // //       cout<<present.boardState[i][j][present.boardState[i][j].size()-1]<<" "; 
+      // //   } 
+      // //   cout<<endl;
+      // // }
+      //   vector <state> ns = nextstate(present) ;
+      // // cout<<endl<<endl<<endl; 
+      // //  vector <state> ns1 = nextstate2(present) ;
+      // // cout<<"neighbours size"<<neighboursnew(present,make_tuple(3,4),1).size()<<endl; 
+      // for(int i=0;i<ns.size();i++)
       // {
       //   cout<<ns[i].printM<<endl; 
-      // }*/
+      // }
 
       // //printMove(present) ;
       // //cout<<endl; 
