@@ -264,11 +264,12 @@ state myMove(state curr)
 double minVal(state &curr, double alpha, double beta);
 double maxVal(state &curr, double alpha, double beta)
 {
-   if(checkRoadWin(curr,2))  //oppnonent road win
+  tuple<int,int> rw =  newcheckRoadWin(curr); 
+   if(get<1>(rw)==1 )  //oppnonent road win
    {     totState++; 
          return -10000000;
    }
-   if(checkRoadWin(curr,1))   // our road win
+   if(get<0>(rw)==1)   // our road win
    {	totState++; 
    		return 10000000 ;
    }
@@ -320,11 +321,12 @@ double maxVal(state &curr, double alpha, double beta)
 
 double minVal(state &curr, double alpha, double beta)
 {
-	if(checkRoadWin(curr,1))   // our road win
+  tuple<int,int> rw =  newcheckRoadWin(curr);
+	if(get<0>(rw)==1)   // our road win
    {	totState++; 
    		return 10000000 ;
    }
-   if(checkRoadWin(curr,2))  //oppnonent road win
+   if(get<1>(rw)==1)  //oppnonent road win
    {	totState++; 
    		return -10000000;
    }
@@ -481,7 +483,7 @@ int main()
             printS(current);
             current= alphabetaPruning(current);
             evalFxn(current);
-            if(checkRoadWin(current,1))
+            if(get<0>(newcheckRoadWin(current))==1)
             { 
             	cerr<<"winning"<<endl;
                writeWeights(); 

@@ -788,6 +788,164 @@ bool checkRoadWin(state &s, int num)
 }
 
 
+
+tuple<int,int> newcheckRoadWin(state &s)
+{
+	int player1=0;
+	int player2=0;
+
+	int p,q,r,t;
+	p=1; q=5; r=2; t=6;
+
+	int n= boardSize;
+	//bool f = false;
+
+
+	bool checkplayer1=false;
+	bool checkplayer2=false;	
+	int numStone;
+
+	bool onefirstrow=false;
+	bool secondfirstrow=false;
+	bool one=false;
+	bool two=false;
+
+	
+	for(int t1=0;t1<n && (checkplayer1==false || checkplayer2==false);t1++)
+	{
+		if(s.boardState[t1][0].size()==0)
+			continue ;
+		numStone = s.boardState[t1][0][s.boardState[t1][0].size()-1];
+
+		if((numStone==p || numStone==q) && checkplayer1==false)	//means player1 stone
+		{
+			stack< tuple<int,int> > mystack;
+			set< tuple<int,int> > myset;
+		
+			mystack.push(make_tuple(t1,0));
+			while(!mystack.empty() && checkplayer1==false)
+			{
+				tuple<int,int> current = mystack.top();
+				mystack.pop();
+				int initialSize=myset.size();
+				myset.insert(current);
+				if(myset.size()==initialSize)
+					continue;
+				else
+				{
+					if(get<1>(current)==n-1)	//TODO make  VAriable to true
+						{
+							checkplayer1=true;
+							player1=1;
+						}
+					
+					vector<tuple<int,int> > n=neighbours(s,current,1);
+					for(int j=0;j<n.size();j++)
+						mystack.push(n[j]);		
+					
+				}
+			}
+		}
+
+
+		else if((numStone==r || numStone==t) && checkplayer2==false)	//means player2 stone
+		{
+			stack< tuple<int,int> > mystack;
+			set< tuple<int,int> > myset;
+		
+			mystack.push(make_tuple(t1,0));
+			while(!mystack.empty() && checkplayer2==false)
+			{
+				tuple<int,int> current = mystack.top();
+				mystack.pop();
+				int initialSize=myset.size();
+				myset.insert(current);
+				if(myset.size()==initialSize)
+					continue;
+				else{
+					if(get<1>(current)==n-1)	//TODO make  VAriable to true
+					{
+						checkplayer2=true;
+						player2=1;
+					}	
+					
+					vector<tuple<int,int> > n=neighbours(s,current,2);
+					for(int j=0;j<n.size();j++)
+						mystack.push(n[j]);		
+					
+				}
+			}
+		}
+	}
+
+	for(int t2=0;t2<n && (checkplayer1==false || checkplayer2==false);t2++)
+	{
+		if(s.boardState[0][t2].size()==0)
+			continue ;
+		numStone = s.boardState[0][t2][s.boardState[0][t2].size()-1];
+		if((numStone==p || numStone==q) && checkplayer1==false)
+		{
+			stack< tuple<int,int> > mystack;
+			set< tuple<int,int> > myset;
+		
+			mystack.push(make_tuple(0,t2));
+			while(!mystack.empty() && checkplayer1==false)
+			{
+				tuple<int,int> current = mystack.top();
+				mystack.pop();
+				int initialSize=myset.size();
+				myset.insert(current);
+				if(myset.size()==initialSize)
+					continue;
+				else
+				{
+					if(get<0>(current)==n-1)
+					{
+						checkplayer1=true;
+						player1=1;
+					}	
+						
+					
+					vector<tuple<int,int> > n=neighbours(s,current,1);
+					for(int j=0;j<n.size();j++)
+						mystack.push(n[j]);		
+					
+				}
+			}
+		}
+		else if((numStone==r || numStone==t) && checkplayer2==false)
+		{
+			stack< tuple<int,int> > mystack;
+			set< tuple<int,int> > myset;
+		
+			mystack.push(make_tuple(0,t2));
+			while(!mystack.empty() && checkplayer2==false)
+			{
+				tuple<int,int> current = mystack.top();
+				mystack.pop();
+				int initialSize=myset.size();
+				myset.insert(current);
+				if(myset.size()==initialSize)
+					continue;
+				else
+				{
+					if(get<0>(current)==n-1)	//TODO make  VAriable to true
+					{
+						checkplayer2=true;
+						player2=1;
+					}
+					vector<tuple<int,int> > n=neighbours(s,current,2);
+					for(int j=0;j<n.size();j++)
+						mystack.push(n[j]);		
+					
+				}
+			}
+		}
+	}
+	return make_tuple(player1,player2);
+}
+
+
 double oneLess1(state &s,int i,int a, int who)
 {
 	int n=s.boardState.size();
@@ -1091,11 +1249,12 @@ double evalFxn(state s)
 {
 	//cerr<<"yoyo"<<endl;
 	double val = 0.0 ;
-	if(checkRoadWin(s,2))
+	tuple<int,int> rw = newcheckRoadWin(s);
+	if(get<1>(rw)==1)
 	{	//cout<<"yes its happening"<<endl;
 		return -10000000.00;
 	}
-	if(checkRoadWin(s,1))
+	if(get<0>(rw)==1)
 	{	
 		//cout<<"yes its happening 2"<<endl;
 		return 10000000.00 ;
