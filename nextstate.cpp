@@ -504,9 +504,10 @@ void nextstate(state &curr)  //decide on the moves here
     {
       for(int j=0;j<boardSize;j++)
       { tuple<int,int> v123= make_tuple(i,j);
-        if(curr.boardState[i][j].size()==0&&(neighboursnew(curr,make_tuple(i,j),1).size()>0 || neighboursnew(curr,make_tuple(i,j),2).size()>0))  //&&(!emptyneighbour(curr,make_tuple(i,j)))
+        if(curr.boardState[i][j].size()==0)  //&&(!emptyneighbour(curr,make_tuple(i,j)))
         {  
-             //for flatstone
+        if(!(neighboursnew(curr,make_tuple(i,j),1).size()==0 && prune))
+         {    //for flatstone
            temp.boardState = curr.boardState ;
            temp.depth= curr.depth+1 ; 
            temp.parent= &curr ;
@@ -545,6 +546,8 @@ void nextstate(state &curr)  //decide on the moves here
             temp2.printM="C"+my_map2[j+1]+my_map3[boardSize-i];
             temp2.boardState[i][j].push_back(q) ;
             myMoveVec.push_back(temp2) ;
+           }
+
            }        
            //cout<<" "<<nextS.size()<<" ";
         }
@@ -645,10 +648,11 @@ void nextstate(state &curr)  //decide on the moves here
               pos.push_back(-1) ;
               for(int z=0; z<curr.boardState[i][j].size();z++)
                 {
-                  if(true)
-                  {
-                    pos.push_back(z); 
-                  }   
+                  
+		              if(curr.boardState[i][j][z]==t||curr.boardState[i][j][z]==p||curr.boardState[i][j][z]==q)
+		              {
+		                pos.push_back(z); 
+		              }     
                 }
                 if(pos.size()==1)
                 {
@@ -777,6 +781,7 @@ void nextstate2(state &curr) //decide on the moves here
       {
         if(curr.boardState[i][j].size()==0&&(neighboursnew(curr,make_tuple(i,j),1).size()>0 || neighboursnew(curr,make_tuple(i,j),2).size()>0))  //&&(!emptyneighbour(curr,make_tuple(i,j)))
         {  
+
              //for flatstone
            temp.boardState = curr.boardState ;
            temp.depth= curr.depth+1 ; 
@@ -896,6 +901,19 @@ void nextstate2(state &curr) //decide on the moves here
             }
           if(curr.boardState[i][j][curr.boardState[i][j].size()-1]==q)
             {
+            // 	vector<int> pos ;
+		          // pos.push_back(-1) ;
+		          // for(int z=0; z<curr.boardState[i][j].size();z++)
+		          //   {
+		          //     if(curr.boardState[i][j][z]==t||curr.boardState[i][j][z]==p||curr.boardState[i][j][z]==q)
+		          //     {
+		          //       pos.push_back(z); 
+		          //     }   
+		          //   }
+		          // if(pos.size()==1)
+		          // {
+		          //   pos.pop_back();  
+		          // } 
                 tr= pos.size()-1 ;
 
               int y123; 

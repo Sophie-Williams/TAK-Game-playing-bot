@@ -102,7 +102,8 @@ void train(state s, double trueVal)
 	weights[15]=weights[15]+learningR*(2)*(trueVal-evaluation)*(facefeat24);  //-facefeat24
 	cerr<<"own features values"<<facefeat10<<" "<<facefeat11<<" "<<facefeat12<<" "<<facefeat13<<endl;
 	cerr<<"ffeatures values"<<facefeat20<<" "<<facefeat21<<" "<<facefeat22<<" "<<facefeat23<<endl;
-*/
+	*/
+
 }
 
 void influence(state &s, int num)
@@ -1281,7 +1282,7 @@ double evalFxn(state s)
 	cerr<<"straightstones= "<<ss<<endl;
 	*/
 	//weights[4]*facefeat10+weights[5]*facefeat11+weights[6]*facefeat12+weights[7]*facefeat13+weights[8]*facefeat14+weights[9]*facefeat20+weights[10]*facefeat21+weights[11]*facefeat22+weights[12]*facefeat23+weights[13]*facefeat24+
-	//
+
 	val=weights[0]*influence10+weights[1]*influence11+weights[2]*influence20+weights[3]*influence21+weights[14]*ss+weights[15]*oneremaining1+weights[16]*oneremaining2;
 	//cerr<<val<<endl;
 	return val ;   //returns a evaluation of state

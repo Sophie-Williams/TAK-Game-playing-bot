@@ -374,6 +374,7 @@ state alphabetaPruning(state curr)
      //check in transposition tables
      //if not found , call for maxVal
    moveSelected =false; 
+   cerr<<"alpha beta started"<<endl ;
     double result =maxVal(curr,LONG_MIN,LONG_MAX) ;
     if(result<=-1000000)
      { prune =false; 
@@ -449,9 +450,9 @@ int main()
    cerr<<myremTime<<endl;
    movNumber=1;
     
-   //state present(boardSize);
+  //state present(boardSize);
    while(true)
-   {	
+    {	
        string opponentmove; 
         if(movNumber!=1||ab[0]-48==2)
         {
@@ -485,6 +486,7 @@ int main()
         		ply= 4; 
         	}
             printS(current);
+            //cerr<<"alpha beta called"<<endl; 
             current= alphabetaPruning(current);
             evalFxn(current);
             if(get<0>(newcheckRoadWin(current))==1)
@@ -505,10 +507,10 @@ int main()
         cerr<<myremTime<<endl;
         movNumber=movNumber+1; 
         
-      // cout<<"yo bitches"<<endl; 
-      // string s1; 
+      //cout<<"yo bitches"<<endl; 
+       //string s1; 
       // string s2; 
-      // cin>>s1;
+       //cin>>s1;
       //cin>>s2;
       //changeArray(present,1,s1) ;
       //changeArray(present,2,s2) ;
@@ -526,39 +528,40 @@ int main()
       //   cout<<endl;
       // }
       // ply=4; 
-      // ourStonesRem =1 ;
-      // ourCapRem=false ;
-      // oppoCapRem=false; 
-      // oppoStonesRem=7; 
-      // present.boardState[0][3]={1,1,1,1,4}; 
-      // present.boardState[1][4]={2,1,6};//push_back(2);
-      // present.boardState[2][3]={2,1,1,4};//push_back(1);
-      // present.boardState[2][2]={1,1,1,1,1,4}; //push_back(1);
-      // present.boardState[3][0]={2,1,4} ;
-      // present.boardState[3][1]={2,1,4} ;
-      // present.boardState[3][2]={4} ;
-      // present.boardState[3][3]={1,4} ;
-      // present.boardState[3][4]={3} ;
-      // present.boardState[4][0]={1} ;
-      // present.boardState[4][1]={1,1,1,1,1,4} ;
-      // present.boardState[4][2]={1,4} ;
-      // present.boardState[4][3]={1,4,5} ;
-      // present.boardState[4][4]={2,1} ;
+      // // ourStonesRem =1 ;
+      //   ourCapRem=false ;
+      //   oppoCapRem=false; 
+      // // // oppoStonesRem=7; 
+      //   present.boardState[0][2]={2,1}; 
+      //   present.boardState[0][3]={1,3};//push_back(2);
+      //   present.boardState[1][0]={2,2};//push_back(1);
+      //   present.boardState[1][1]={2}; //push_back(1);
+      //   present.boardState[1][2]={1,6} ;
+      //   present.boardState[1][3]={2,1} ;
+      //  present.boardState[2][0]={2,2,2,2,5} ;
+      // present.boardState[2][1]={2} ;
+      // present.boardState[3][0]={2} ;
+      // present.boardState[3][1]={2,1,1,2} ;
+      // // present.boardState[4][0]={1} ;
+      // // present.boardState[4][1]={1,1,1,1,1,4} ;
+      // // present.boardState[4][2]={1,4} ;
+      // // present.boardState[4][3]={1,4,5} ;
+      // // present.boardState[4][4]={2,1} ;
 
-      // //present.boardState[2][4]={1,4};//push_back(2);
+      // // //present.boardState[2][4]={1,4};//push_back(2);
       
-      // //present.boardState[2][3]={2,5};
-      // //present.boardState[3][3]={1,1,1,4};
-      // //present.boardState[2][4]={1,4};
-      // present=alphabetaPruning(present);
-      // printS(present) ;
-      // // // // cout<<endl<<endl<<endl; 
-      // // // //  vector <state> ns1 = nextstate2(present) ;
-      // // // // cout<<"neighbours size"<<neighboursnew(present,make_tuple(3,4),1).size()<<endl; 
-      // //  // for(int i=0;i<myMoveVec.size();i++)
-      // //  // {
-      // //  //   cout<<myMoveVec[i].printM<<endl; 
-      // //  // }
+      // // //present.boardState[2][3]={2,5};
+      // // //present.boardState[3][3]={1,1,1,4};
+      // // //present.boardState[2][4]={1,4};
+      // // present=alphabetaPruning(present);
+      // // printS(present) ;
+      // // // // // cout<<endl<<endl<<endl; 
+      // nextstate(present) ;
+      // // // // // cout<<"neighbours size"<<neighboursnew(present,make_tuple(3,4),1).size()<<endl; 
+      //  for(int i=0;i<myMoveVec.size();i++)
+      //  {
+      //    cout<<myMoveVec[i].printM<<endl; 
+      //  }
 
       // printMove(present) ;
       // //cout<<endl; 
