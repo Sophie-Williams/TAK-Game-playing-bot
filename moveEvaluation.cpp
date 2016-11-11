@@ -23,7 +23,7 @@ void init()
  weightsMove[3]=  20 ;  //opponentcaptures
  weightsMove[4]=  10 ;   //terrotary expanded
  weightsMove[5]=  40 ;   //capLeading
- weightsMove[6]=  10 ;   //placing stones at empty neighbour
+ weightsMove[6]=  0 ;   //placing stones at empty neighbour
 }
 
 
