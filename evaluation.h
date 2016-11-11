@@ -5,6 +5,7 @@ vector<tuple<int,int> > neighbours(state &s, tuple<int,int> t, int who);
 vector<tuple<int,int> > notNeighbours(state &s, tuple<int,int> t, int who);
 double straightStones(state &s);
 bool checkRoadWin(state &s, int num);
+tuple<int,int> newcheckRoadWin(state &s);
 double oneLess1(state &s,int j,int a, int who);
 double oneLess2(state &s,int j,int a, int who);
 vector < vector<tuple<int,int> > > aux1(state &s, int t, int who);

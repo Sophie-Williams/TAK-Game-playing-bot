@@ -104,8 +104,9 @@ state changeArray(state &temp,int playerNum,string s)
                   if(vnew.size()!=0)
                   {
                     int n = vnew[vnew.size()-1];
-                    if((n==4 and v.back()==5) || (n==3 and v.back()==6))
-                      temp.boardState[row-1][column-1][vnew.size()-1]=n-2;
+                    if((n==3 || n==4) && (v.back()==5 || v.back()==6))
+                      {cerr<<"yayyyyyyyy"<<endl;
+                      temp.boardState[row-1][column-1][vnew.size()-1]=n-2;}
                   }
                     temp.boardState[row-1][column-1].push_back(v.back());
                     v.pop_back();  
@@ -119,8 +120,9 @@ state changeArray(state &temp,int playerNum,string s)
                   if(vnew.size()!=0)
                   {
                     int n = vnew[vnew.size()-1];
-                    if((n==4 and v.back()==5) || (n==3 and v.back()==6))
-                      temp.boardState[row-1][column-1][vnew.size()-1]=n-2;
+                    if((n==3 || n==4) && (v.back()==5 || v.back()==6))
+                      { cerr<<"yayyy"<<endl;
+                      temp.boardState[row-1][column-1][vnew.size()-1]=n-2;}
                   }
                   temp.boardState[row-1][column-1].push_back(v.back());
                   v.pop_back();  
@@ -134,8 +136,9 @@ state changeArray(state &temp,int playerNum,string s)
                   if(vnew.size()!=0)
                   {
                     int n = vnew[vnew.size()-1];
-                    if((n==4 and v.back()==5) || (n==3 and v.back()==6))
-                      temp.boardState[row-1][column-1][vnew.size()-1]=n-2;
+                    if((n==3 || n==4) && (v.back()==5 || v.back()==6))
+                      { cerr<<"yayyy"<<endl;
+                      temp.boardState[row-1][column-1][vnew.size()-1]=n-2;}
                   }
                   temp.boardState[row-1][column-1].push_back(v.back());
                   v.pop_back();  
@@ -149,8 +152,9 @@ state changeArray(state &temp,int playerNum,string s)
                   if(vnew.size()!=0)
                   {
                     int n = vnew[vnew.size()-1];
-                    if((n==4 and v.back()==5) || (n==3 and v.back()==6))
-                      temp.boardState[row-1][column-1][vnew.size()-1]=n-1;
+                    if((n==3 || n==4) && (v.back()==5 || v.back()==6))
+                      { cerr<<"yayyy"<<endl;
+                      temp.boardState[row-1][column-1][vnew.size()-1]=n-2;}
                   }
                   temp.boardState[row-1][column-1].push_back(v.back());
                   v.pop_back();  
@@ -264,11 +268,12 @@ state myMove(state curr)
 double minVal(state &curr, double alpha, double beta);
 double maxVal(state &curr, double alpha, double beta)
 {
-   if(checkRoadWin(curr,2))  //oppnonent road win
+  tuple<int,int> rw =  newcheckRoadWin(curr); 
+   if(get<1>(rw)==1 )  //oppnonent road win
    {     totState++; 
          return -10000000;
    }
-   if(checkRoadWin(curr,1))   // our road win
+   if(get<0>(rw)==1)   // our road win
    {	totState++; 
    		return 10000000 ;
    }
@@ -320,11 +325,12 @@ double maxVal(state &curr, double alpha, double beta)
 
 double minVal(state &curr, double alpha, double beta)
 {
-	if(checkRoadWin(curr,1))   // our road win
+  tuple<int,int> rw =  newcheckRoadWin(curr);
+	if(get<0>(rw)==1)   // our road win
    {	totState++; 
    		return 10000000 ;
    }
-   if(checkRoadWin(curr,2))  //oppnonent road win
+   if(get<1>(rw)==1)  //oppnonent road win
    {	totState++; 
    		return -10000000;
    }
@@ -483,7 +489,7 @@ int main()
             //cerr<<"alpha beta called"<<endl; 
             current= alphabetaPruning(current);
             evalFxn(current);
-            if(checkRoadWin(current,1))
+            if(get<0>(newcheckRoadWin(current))==1)
             { 
             	cerr<<"winning"<<endl;
                writeWeights(); 
