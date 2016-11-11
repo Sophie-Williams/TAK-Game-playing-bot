@@ -14,16 +14,18 @@ map<char,int> my_map7 = {{ '1',1 },{'2', 2},{ '3',3},{ '4',4},{'5',5},{'6', 6},{
 int tExpanded ;
 int oppoCaptured ;
 int capLeading ;
-double weightsMove[7] ;
+double weightsMove[8] ;
+int makingStandingFlat ;
 void init()
 {
  weightsMove[0]= 150 ;  //oneremfor our player
  weightsMove[1]= -150; //oneremfor opponent
- weightsMove[2]= 100;  //roadblocked
+ weightsMove[2]= 200;  //roadblocked
  weightsMove[3]=  20 ;  //opponentcaptures
  weightsMove[4]=  10 ;   //terrotary expanded
  weightsMove[5]=  40 ;   //capLeading
  weightsMove[6]=  10 ;   //placing stones at empty neighbour
+ weightsMove[7] =100;  //making standing flat 
 }
 
 
@@ -156,6 +158,7 @@ void capturingOppStack(state &old,  state &new1, int playNum )
 	oppoCaptured=0 ;
 	tExpanded= 0  ;
 	capLeading= 0 ; 
+	makingStandingFlat= 0 ;
 	for(int i=0;i<boardSize;i++)
 	{
 		for(int j=0;j<boardSize;j++)
@@ -186,6 +189,9 @@ void capturingOppStack(state &old,  state &new1, int playNum )
 						oppoCaptured++ ;                                                            //weight to be tuned
 					if(piece2==r1)
 						capLeading= capLeading+size2 ;
+					if((piece==q1||piece==q2)&&piece2==r1)
+							makingStandingFlat++ ;
+							
 				}
 			}
 		} 
@@ -214,6 +220,6 @@ double evaluateMove(state &old, state &new1,  int playNum)
 	capturingOppStack(old, new1, playNum); 
 	double roadBlocked= blockingRoad(old , new1, playNum);  	
 	double emptyPlaceval= emptyPlace(old, new1,playNum) ;
-	return weightsMove[0]*oneremaining1 +weightsMove[1]*oneremaining2+ weightsMove[2]*roadBlocked+ weightsMove[3]*oppoCaptured+weightsMove[4]*tExpanded + weightsMove[5]*capLeading+weightsMove[6]*emptyPlaceval;  	
+	return weightsMove[0]*oneremaining1 +weightsMove[1]*oneremaining2+ weightsMove[2]*roadBlocked+ weightsMove[3]*oppoCaptured+weightsMove[4]*tExpanded + weightsMove[5]*capLeading+weightsMove[6]*emptyPlaceval + makingStandingFlat*weightsMove[7];  	
 
 }
