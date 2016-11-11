@@ -98,7 +98,7 @@ double emptyPlace(state &old , state &new1, int playNum)
 	int y= my_map6[new1.printM[1]] -1;
 	if(new1.printM[0]=='F'||new1.printM[0]=='C'||new1.printM[0]=='S')
 	{	
-	if(neighboursnew(new1,make_tuple(x,y),playNum%2+1).size()>0||neighboursnew(new1,make_tuple(x,y),playNum).size()==0)
+	if(neighboursnew(new1,make_tuple(x,y),playNum%2+1).size()>0&&neighboursnew(new1,make_tuple(x,y),playNum).size()==0)
 	{
 		if(new1.printM[0]=='F')
 		{	if(playNum==1)
@@ -108,9 +108,9 @@ double emptyPlace(state &old , state &new1, int playNum)
 		}
 		else
 		{	if(playNum==1)
-			return -2 ;
+			return -10 ;
 			if(playNum==2)
-			return 2 ;
+			return 10 ;
 		}
 	}
 	else 
