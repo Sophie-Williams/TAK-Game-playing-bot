@@ -26,9 +26,9 @@ double facefeat22;
 double facefeat23;
 double facefeat24;
 
-double ss;
-double oneremaining1;
-double oneremaining2;
+double ss=0.0;
+double oneremaining1=0.0;
+double oneremaining2=0.0;
 void writeWeights()
 {
   /*ofstream myfile;
@@ -46,8 +46,8 @@ void initialWeights(int player)
 	////weights.resize(10); 
 	//std::ifstream ifile;
 	std::ifstream ifile("weights.txt", std::ios::in);
-	if(player==2)
-	std::ifstream ifile("weights2.txt", std::ios::in);
+	//if(player==2)
+	//std::ifstream ifile("weights2.txt", std::ios::in);
 	//else
 	//ifile	std::ifstream ifile2("weights1.txt", std::ios::in);
     std::vector<double> scores;
@@ -258,9 +258,9 @@ void influence(state &s, int num)
 					}
 					
 					if(cum>=cumopponent)
-						hard+=cum-cumopponent/2;
+						hard+=cum-cumopponent/3;
 					else
-						soft+=cumopponent-cum/2;
+						soft+=cumopponent-cum/3;
 				}
 			}
 		}
@@ -270,7 +270,7 @@ void influence(state &s, int num)
 	if(num==1)
 	{
 		influence10=numEmpty;
-		influence11=numMyStones-numOppStones;
+		influence11=numMyStones-1.2*numOppStones;
 
 		facefeat10=flat;
 		facefeat11=standing;
@@ -283,7 +283,7 @@ void influence(state &s, int num)
 	else
 	{
 		influence20=numEmpty;
-		influence21=numMyStones-numOppStones;
+		influence21=numMyStones-1.2*numOppStones;
 
 		facefeat20=flat;
 		facefeat21=standing;
@@ -810,7 +810,8 @@ tuple<int,int> newcheckRoadWin(state &s)
 	bool one=false;
 	bool two=false;
 
-	
+
+
 	for(int t1=0;t1<n && (checkplayer1==false || checkplayer2==false);t1++)
 	{
 		if(s.boardState[t1][0].size()==0)
@@ -1271,11 +1272,10 @@ double evalFxn(state s)
 	influence(s,2);
 	//facefeat(s,1);
 	//facefeat(s,2);
-	ss=straightStones(s);
-	oneremaining1=oneRemaining(s,1);
-	oneremaining2=oneRemaining(s,2);
-	//facefeat(s,1);
-	//facefeat(s,2);
+	//ss=straightStones(s);
+	//oneremaining1=oneRemaining(s,1);
+	//oneremaining2=oneRemaining(s,2);
+
 	/*cerr<<"facefeatures= "<<facefeat10<<endl;
 	cerr<<"influence= "<<influence0<<endl;
 	cerr<<"straightstones= "<<ss<<endl;

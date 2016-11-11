@@ -19,7 +19,7 @@ void init()
 {
  weightsMove[0]= 150 ;  //oneremfor our player
  weightsMove[1]= -150; //oneremfor opponent
- weightsMove[2]= 100;  //roadblocked
+ weightsMove[2]= 50;  //roadblocked
  weightsMove[3]=  20 ;  //opponentcaptures
  weightsMove[4]=  10 ;   //terrotary expanded
  weightsMove[5]=  40 ;   //capLeading

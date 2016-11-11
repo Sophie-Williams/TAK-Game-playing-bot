@@ -104,8 +104,9 @@ state changeArray(state &temp,int playerNum,string s)
                   if(vnew.size()!=0)
                   {
                     int n = vnew[vnew.size()-1];
-                    if((n==4 and v.back()==5) || (n==3 and v.back()==6))
-                      temp.boardState[row-1][column-1][vnew.size()-1]=n-2;
+                    if((n==3 || n==4) && (v.back()==5 || v.back()==6))
+                      {cerr<<"yayyyyyyyy"<<endl;
+                      temp.boardState[row-1][column-1][vnew.size()-1]=n-2;}
                   }
                     temp.boardState[row-1][column-1].push_back(v.back());
                     v.pop_back();  
@@ -119,8 +120,9 @@ state changeArray(state &temp,int playerNum,string s)
                   if(vnew.size()!=0)
                   {
                     int n = vnew[vnew.size()-1];
-                    if((n==4 and v.back()==5) || (n==3 and v.back()==6))
-                      temp.boardState[row-1][column-1][vnew.size()-1]=n-2;
+                    if((n==3 || n==4) && (v.back()==5 || v.back()==6))
+                      { cerr<<"yayyy"<<endl;
+                      temp.boardState[row-1][column-1][vnew.size()-1]=n-2;}
                   }
                   temp.boardState[row-1][column-1].push_back(v.back());
                   v.pop_back();  
@@ -134,8 +136,9 @@ state changeArray(state &temp,int playerNum,string s)
                   if(vnew.size()!=0)
                   {
                     int n = vnew[vnew.size()-1];
-                    if((n==4 and v.back()==5) || (n==3 and v.back()==6))
-                      temp.boardState[row-1][column-1][vnew.size()-1]=n-2;
+                    if((n==3 || n==4) && (v.back()==5 || v.back()==6))
+                      { cerr<<"yayyy"<<endl;
+                      temp.boardState[row-1][column-1][vnew.size()-1]=n-2;}
                   }
                   temp.boardState[row-1][column-1].push_back(v.back());
                   v.pop_back();  
@@ -149,8 +152,9 @@ state changeArray(state &temp,int playerNum,string s)
                   if(vnew.size()!=0)
                   {
                     int n = vnew[vnew.size()-1];
-                    if((n==4 and v.back()==5) || (n==3 and v.back()==6))
-                      temp.boardState[row-1][column-1][vnew.size()-1]=n-1;
+                    if((n==3 || n==4) && (v.back()==5 || v.back()==6))
+                      { cerr<<"yayyy"<<endl;
+                      temp.boardState[row-1][column-1][vnew.size()-1]=n-2;}
                   }
                   temp.boardState[row-1][column-1].push_back(v.back());
                   v.pop_back();  
