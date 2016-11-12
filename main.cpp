@@ -55,6 +55,7 @@ state changeArray(state &temp,int playerNum,string s)
             num=1;
          else
             num=2;   
+        oppoStonesRem--; 
       }
       else if(s.at(0)=='S')
       {
@@ -62,6 +63,7 @@ state changeArray(state &temp,int playerNum,string s)
             num=3;
          else
             num=4;   
+        oppoStonesRem--;   
       }
       else if(s.at(0)=='C')
       { oppoCapRem= false ;
@@ -70,7 +72,7 @@ state changeArray(state &temp,int playerNum,string s)
          else
             num=6;
       }
-      oppoStonesRem--; 
+      
       temp.boardState[temp.boardState.size()-row][column-1].push_back(num);
    }
    else
@@ -231,6 +233,7 @@ state firstMove(state &initial,int num)
                 out+=(char)(97+c);
                 out+=(char)(49+r+1);
             }
+    
         }
         else
         {
@@ -386,6 +389,7 @@ state alphabetaPruning(state curr)
     cerr<<"value of state"<<result<<endl; 
     //train(curr, result);
     cerr<<"Ply Followed"<<ply<<endl ;
+    cerr<<"oppnonent stones rem:"<<oppoStonesRem<<" My stones rem "<<ourStonesRem<<endl; 
     cerr<<"Total States: "<<totState<<endl; 
 
    

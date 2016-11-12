@@ -125,9 +125,9 @@ double emptyPlace(state &old , state &new1, int playNum)
 		}
 		else
 		{	if(playNum==1)
-			return 2 ;
+			return -10 ;
 			if(playNum==2)
-			return -2 ;
+			return 10 ;
 		}
 	}
 	}
