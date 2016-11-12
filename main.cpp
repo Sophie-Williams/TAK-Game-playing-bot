@@ -439,7 +439,20 @@ int main()
    initialWeights(1);
    playerNum=1;
    int opponentNum= 2;//(playerNum%2)+1;
+   
    boardSize=ab[2]-48;
+   switch(boardSize)
+   {
+    case 5:  ourStonesRem=21 ;
+              oppoStonesRem=21; 
+            break ;
+    case 6:  ourStonesRem=21 ;    //checkthe number of stones and chnage it;  
+              oppoStonesRem=21;
+            break ;
+    case 7:  ourStonesRem=21 ;
+              oppoStonesRem=21;
+            break ;
+   }
    state initial(boardSize); 
     
    for(int i=0;i<ab.size()-4;i++)
@@ -481,13 +494,13 @@ int main()
         // }
         try
         {
-        	if(myremTime<0.9*totalTime && myremTime>0.1*totalTime)
+        	if(myremTime>0.1*totalTime)
         	{
         		ply= 4; 
         	}
         	else 
         	{
-        		ply= 4; 
+        		ply= 3; 
         	}
             printS(current);
             //cerr<<"alpha beta called"<<endl; 
@@ -532,10 +545,10 @@ int main()
       //   cout<<endl;
       // }
       // ply=4; 
-      // // ourStonesRem =1 ;
-      //   ourCapRem=false ;
-      //   oppoCapRem=false; 
-      // // // oppoStonesRem=7; 
+      // // // ourStonesRem =1 ;
+      //    ourCapRem=false ;
+      //    oppoCapRem=false; 
+      // // // // oppoStonesRem=7; 
       //   present.boardState[0][2]={2,1}; 
       //   present.boardState[0][3]={1,3};//push_back(2);
       //   present.boardState[1][0]={2,2};//push_back(1);
@@ -559,9 +572,9 @@ int main()
       // // //present.boardState[2][4]={1,4};
       // // present=alphabetaPruning(present);
       // // printS(present) ;
-      // // // // // cout<<endl<<endl<<endl; 
-      // nextstate(present) ;
-      // // // // // cout<<"neighbours size"<<neighboursnew(present,make_tuple(3,4),1).size()<<endl; 
+      // // // // // // cout<<endl<<endl<<endl; 
+      //  nextstate(present) ;
+      // // // // // // cout<<"neighbours size"<<neighboursnew(present,make_tuple(3,4),1).size()<<endl; 
       //  for(int i=0;i<myMoveVec.size();i++)
       //  {
       //    cout<<myMoveVec[i].printM<<endl; 

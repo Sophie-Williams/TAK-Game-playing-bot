@@ -25,6 +25,7 @@ double facefeat21;
 double facefeat22;
 double facefeat23;
 double facefeat24;
+double capLeading1;
 
 double ss=0.0;
 double oneremaining1=0.0;
@@ -112,7 +113,7 @@ void influence(state &s, int num)
 	double numMyStones=0.0;
 	double numOppStones=0.0;
 	double numMySurrOpp=0.0;
-
+	capLeading1= 0 ;
 	double flat = 0.0 ; 	//represents number of flatstones on top
 	double standing= 0.0 ;
 	double cap= 0.0 ;
@@ -144,6 +145,16 @@ void influence(state &s, int num)
 			if(temp.size()!=0)
 			{
 				int stoneNumber=temp[temp.size()-1];
+				
+				if(stoneNumber==r)
+				{	int ret1= temp.size()-boardSize;  
+					for(int f=temp.size()-1;f>=max(0,ret1);f--)
+					{
+						if(temp[f]==p)
+							capLeading1++; 
+					}
+				}
+
 				if(stoneNumber==p || stoneNumber==q || stoneNumber==r)
 				{
 					if(stoneNumber==p)
@@ -1269,8 +1280,8 @@ double evalFxn(state s)
 	double * influenceval;
 	influenceval=influence(s);
 	*/
-	influence(s,1);
-	influence(s,2);
+	influence(s,1);  //for working of capleading, dont call influence2  
+	//influence(s,2);
 	//facefeat(s,1);
 	//facefeat(s,2);
 	//ss=straightStones(s);
@@ -1284,7 +1295,7 @@ double evalFxn(state s)
 
 	//+weights[5]*facefeat11+weights[6]*facefeat12+weights[7]*facefeat13+weights[8]*facefeat14+weights[9]*facefeat20+weights[10]*facefeat21+weights[11]*facefeat22+weights[12]*facefeat23+weights[13]*facefeat24+
 	//+weights[2]*influence20+weights[3]*influence21+weights[0]*influence10+weights[1]*influence11+
-	val=weights[4]*facefeat10+weights[14]*ss+weights[15]*oneremaining1+weights[16]*oneremaining2;
+	val=capLeading1*50+weights[4]*facefeat10+weights[14]*ss+weights[15]*oneremaining1+weights[16]*oneremaining2;
 	
 	//cerr<<val<<endl;
 	return val ;   //returns a evaluation of state

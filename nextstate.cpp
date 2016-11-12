@@ -578,7 +578,7 @@ void nextstate(state &curr)  //decide on the moves here
               int y123; 
               for(y123=0;y123<=tr;y123++)
               {
-                if((pos[tr]-pos[y123])<=5)
+                if((pos[tr]-pos[y123])<=boardSize)
                   { //cerr<<"more stones "<<y123<<endl; 
 
                     break;
@@ -642,27 +642,23 @@ void nextstate(state &curr)  //decide on the moves here
                 }
               }
             }
-          if(curr.boardState[i][j][curr.boardState[i][j].size()-1]==q)
+          if(curr.boardState[i][j][z123]==q)
             {
-              vector<int> pos ;
-              pos.push_back(-1) ;
-              for(int z=0; z<curr.boardState[i][j].size();z++)
-                {
-                  
-		              if(curr.boardState[i][j][z]==t||curr.boardState[i][j][z]==p||curr.boardState[i][j][z]==q)
-		              {
-		                pos.push_back(z); 
-		              }     
-                }
-                if(pos.size()==1)
-                {
-                  pos.pop_back();  
-                }
+            	if(z123>=1)
+            	{ int piece = curr.boardState[i][j][z123-1];
+            		if(piece!=t)
+            		{  int ab=pos.size();
+            		     pos[ab-1]= z123-1;   
+            			 pos.push_back(z123) ;
+            			 // for(int f=0;f<pos.size();f++)
+            			 // 	cout<<pos[f]<<" " ;
+            		}
+            	}
              tr= pos.size()-1 ;
               int y123; 
               for(y123=0;y123<=tr;y123++)
               {
-                if((pos[tr]-pos[y123])<=5)
+                if((pos[tr]-pos[y123])<=boardSize)
                   break; 
               }
               for(int h=0;h<min(top,tr);h++)
@@ -779,10 +775,10 @@ void nextstate2(state &curr) //decide on the moves here
     {
       for(int j=0;j<boardSize;j++)
       {
-        if(curr.boardState[i][j].size()==0&&(neighboursnew(curr,make_tuple(i,j),1).size()>0 || neighboursnew(curr,make_tuple(i,j),2).size()>0))  //&&(!emptyneighbour(curr,make_tuple(i,j)))
+      	int size123=curr.boardState[i][j].size();  
+        if(size123==0&&(neighboursnew(curr,make_tuple(i,j),1).size()>0 || neighboursnew(curr,make_tuple(i,j),2).size()>0))  //&&(!emptyneighbour(curr,make_tuple(i,j)))
         {  
-
-             //for flatstone
+           //for flatstone
            temp.boardState = curr.boardState ;
            temp.depth= curr.depth+1 ; 
            temp.parent= &curr ;
@@ -811,7 +807,7 @@ void nextstate2(state &curr) //decide on the moves here
            }        
            //cout<<" "<<nextS.size()<<" ";
         }
-        else if(curr.boardState[i][j].size()!=0)  //for moving of stones
+        else if(size123!=0)  //for moving of stones
         {
           vector<int> pos ;
           pos.push_back(-1) ;
@@ -832,13 +828,13 @@ void nextstate2(state &curr) //decide on the moves here
             int left =j;
             int tr;
             //cout<<" "<<pos.size()<<"i am here"<<curr.boardState[i][j][curr.boardState[i][j].size()-1]<<endl  ; 
-          if(curr.boardState[i][j][curr.boardState[i][j].size()-1]==t||curr.boardState[i][j][curr.boardState[i][j].size()-1]==p) //if top stone is flatstone 
+          if(curr.boardState[i][j][size123-1]==t||curr.boardState[i][j][size123-1]==p) //if top stone is flatstone 
             {    tr= pos.size()-1 ;
               
               int y123; 
               for(y123=0;y123<=tr;y123++)
               {
-                if((pos[tr]-pos[y123])<=5)
+                if((pos[tr]-pos[y123])<=boardSize)
                   { //cerr<<"more stones "<<y123<<endl; 
 
                     break;
@@ -899,27 +895,24 @@ void nextstate2(state &curr) //decide on the moves here
                 }
               }
             }
-          if(curr.boardState[i][j][curr.boardState[i][j].size()-1]==q)
-            {
-            // 	vector<int> pos ;
-		          // pos.push_back(-1) ;
-		          // for(int z=0; z<curr.boardState[i][j].size();z++)
-		          //   {
-		          //     if(curr.boardState[i][j][z]==t||curr.boardState[i][j][z]==p||curr.boardState[i][j][z]==q)
-		          //     {
-		          //       pos.push_back(z); 
-		          //     }   
-		          //   }
-		          // if(pos.size()==1)
-		          // {
-		          //   pos.pop_back();  
-		          // } 
+          if(curr.boardState[i][j][size123-1]==q)
+            { int z123= size123-1; 
+            	if(z123>=1)
+            	{ int piece = curr.boardState[i][j][z123-1];
+            		if(piece!=t)
+            		{  int ab=pos.size();
+            		     pos[ab-1]= z123-1;   
+            			 pos.push_back(z123) ;
+            			 // for(int f=0;f<pos.size();f++)
+            			 // 	cout<<pos[f]<<" " ;
+            		}
+            	}
                 tr= pos.size()-1 ;
 
               int y123; 
               for(y123=0;y123<=tr;y123++)
               {
-                if((pos[tr]-pos[y123])<=5)
+                if((pos[tr]-pos[y123])<=boardSize)
                   { //cerr<<"more stones "<<y123<<endl; 
 
                     break;
