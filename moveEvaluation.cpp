@@ -26,6 +26,7 @@ void init()
  weightsMove[5]=  40 ;   //capLeading
  weightsMove[6]=  10 ;   //placing stones at empty neighbour
  weightsMove[7] =100;  //making standing flat 
+
 }
 
 
